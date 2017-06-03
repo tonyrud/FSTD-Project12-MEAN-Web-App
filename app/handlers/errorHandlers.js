@@ -1,6 +1,6 @@
 /*
   async/await, needs this catch errors
-  Instead of using try{} catch(e) {} in each controller, we wrap the function in
+  Instead of using try{} catch(e) {} in each controller, wrap and async function in
   catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
 
@@ -22,7 +22,7 @@ exports.notFound = (req, res, next) => {
 /*
   Development Error Hanlder
 
-  In development, show error messages so if we hit a syntax error or any other previously un-handled error, we can show good info on what happened
+  In development, show error messages related to pug views
 */
 exports.developmentErrors = (err, req, res, next) => {
   err.stack = err.stack || ''
