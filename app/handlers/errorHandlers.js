@@ -1,26 +1,23 @@
 /*
-  Catch Errors Handler
-
-  With async/await, needs this catch errors
+  async/await, needs this catch errors
   Instead of using try{} catch(e) {} in each controller, we wrap the function in
   catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
 
 exports.catchAsyncErrors = (fn) => {
   return function (req, res, next) {
-    return fn(req, res, next).catch(next);
+    return fn(req, res, next).catch(next)
   };
-};
+}
 
 /*
   Not Found Error Handler
 */
 exports.notFound = (req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  const err = new Error('Not Found')
+  err.status = 404
+  next(err)
 };
-
 
 /*
   Development Error Hanlder
@@ -28,22 +25,21 @@ exports.notFound = (req, res, next) => {
   In development, show error messages so if we hit a syntax error or any other previously un-handled error, we can show good info on what happened
 */
 exports.developmentErrors = (err, req, res, next) => {
-  err.stack = err.stack || '';
+  err.stack = err.stack || ''
   const errorDetails = {
     message: err.message,
     status: err.status,
     stackHighlighted: err.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>')
-  };
-  res.status(err.status || 500);
+  }
+  res.status(err.status || 500)
   res.format({
     // Based on the `Accept` http header
     'text/html': () => {
-      res.render('error', errorDetails);
+      res.render('error', errorDetails)
     }, // Form Submit, Reload the page
     'application/json': () => res.json(errorDetails) // Ajax call, send JSON back
-  });
+  })
 };
-
 
 /*
   Production Error Handler
@@ -51,9 +47,9 @@ exports.developmentErrors = (err, req, res, next) => {
   Keep stack traces from user
 */
 exports.productionErrors = (err, req, res, next) => {
-  res.status(err.status || 500);
+  res.status(err.status || 500)
   res.render('error', {
     message: err.message,
     error: {}
-  });
+  })
 };
