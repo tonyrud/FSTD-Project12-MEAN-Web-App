@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RequestsService } from './requests.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [],
   providers: [
     RequestsService
   ]
