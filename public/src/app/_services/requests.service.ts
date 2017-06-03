@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { APP_CONFIG } from '../../../../config/client/app.config';
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable';
+import { AppConfigService } from './app.config.service';
 
 @Injectable()
 export class RequestsService {
+  // hold api server string
+  private apiServer: string
 
   constructor(
-    private http: Http
-  ) { }
+    private http: Http,
+    private configService: AppConfigService
+  ) {
+    this.apiServer = configService.config.apiServer
+   }
 
   public apiGet(endpoint: string): Observable<any> {
-    return this.http.get(APP_CONFIG.apiServer + endpoint).map((response: Response) => response.json())
+    return this.http.get(this.apiServer + endpoint).map((response: Response) => response.json())
   }
 
   // public apiPost(endpoint: string, body: any) {
