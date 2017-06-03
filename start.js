@@ -1,5 +1,12 @@
 const mongoose = require('mongoose')
 
+// Make sure node 7.6+ for async functions
+const [major, minor] = process.versions.node.split('.').map(parseFloat)
+if (major <= 7 && minor <= 5) {
+  console.log('You\'re on an older version of node that doesn\'t support async/await. Please go to nodejs.org and download version 7.6 or greater.')
+  process.exit()
+}
+
 // import environmental variables from variables.env file
 require('dotenv').config({ path: './config/env/variables.env' })
 
