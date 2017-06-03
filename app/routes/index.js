@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const userController = require('./../controllers/userController')
+const { catchAsyncErrors } = require('./../handlers/errorHandlers')
 
-// Do work here
-router.get('/', (req, res) => {
-  res.json({ key: 'works!' })
-})
+// Users routes
+router.get('/users', catchAsyncErrors(userController.getUsers))
 
 module.exports = router

@@ -7,8 +7,9 @@
     "prod": "node ./start.js",
     "public": "webpack-dev-server --port=4200",
     "watch": "nodemon ./start.js --ignore public/",
-    "start": "concurrently \"npm run watch\" \"npm run public\" --names \"💻\" --prefix name",
-    "seed": "node ./data/load-sample-data.js"
+    "start": "concurrently \"npm run watch\" \"npm run public\"  --names \"💻, 📦\" --prefix name",
+    "seed": "node ./app/data/load-sample-data.js",
+    "delete-db-data": "node ./data/load-sample-data.js --delete"
   },
   "repository": {
     "type": "git",

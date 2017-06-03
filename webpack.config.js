@@ -78,7 +78,7 @@ module.exports = {
       "./public/src\\polyfills.ts"
     ],
     "styles": [
-      "./public/src\\styles.scss"
+      "./public/src/styles\\styles.scss"
     ]
   },
   "output": {
@@ -114,7 +114,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.css$/,
         "use": [
@@ -137,7 +137,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -168,7 +168,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.less$/,
         "use": [
@@ -197,7 +197,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.styl$/,
         "use": [
@@ -227,7 +227,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.css$/,
         "use": [
@@ -250,7 +250,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.scss$|\.sass$/,
         "use": [
@@ -281,7 +281,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.less$/,
         "use": [
@@ -310,7 +310,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src\\styles.scss")
+          path.join(process.cwd(), "./public/src/styles\\styles.scss")
         ],
         "test": /\.styl$/,
         "use": [
@@ -352,7 +352,7 @@ module.exports = {
         "favicon.ico"
       ],
       "globOptions": {
-        "cwd": "D:\\Hosts\\Treehouse Full Stack Techdegree\\FSTD-Project12-MEAN-Web-App\\public\\src",
+        "cwd": `${path.join(process.cwd())}/public/src`,
         "dot": true,
         "ignore": "**/.gitkeep"
       }
