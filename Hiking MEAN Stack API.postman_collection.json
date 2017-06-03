@@ -12,22 +12,13 @@
 			"description": "",
 			"item": [
 				{
-					"name": "Get Users",
+					"name": "users/index",
 					"request": {
 						"url": "localhost:4000/api/users",
 						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Awesome Recipe\",\n    \"prepTime\": 0,\n    \"ingredients\": [\n        {\n            \"item\": \"Potatoes\"\n        },\n        {\n        }\n    ],\n    \"steps\": [\n    ]\n}"
-						},
-						"description": ""
+						"header": [],
+						"body": {},
+						"description": "This will get all users from database"
 					},
 					"response": []
 				}
