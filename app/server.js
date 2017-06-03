@@ -23,6 +23,17 @@ app.set('view engine', 'pug')
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, 'public')))
 
+// Allows CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept')
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, DELETE')
+    return res.status(200).json({})
+  }
+  next()
+})
+
 // Use morgan for http request logging in dev mode
 app.use(morgan('dev'))
 
