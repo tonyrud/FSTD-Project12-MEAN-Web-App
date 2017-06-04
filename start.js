@@ -22,7 +22,7 @@ require('./app/models/User')
 
 // Start api server
 const app = require('./app/server')
-app.set('port', process.env.API_PORT || 7777)
+app.set('port', process.env.API_PORT || 4200)
 const server = app.listen(app.get('port'), () => {
   console.log(`Express API running → PORT ${server.address().port}`)
   console.log(`Angular Server running → PORT ${process.env.CLIENT_PORT}`)
