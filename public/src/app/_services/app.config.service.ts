@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APP_CONFIG } from '../../../../config/client/app.config';
+import { APP_CONFIG } from './../../../app.config';
 
 @Injectable()
 export class AppConfigService {

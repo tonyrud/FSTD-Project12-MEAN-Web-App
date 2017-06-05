@@ -1,4 +1,6 @@
-const express = require('express')
+// con
+import * as express from 'express';
+import { Application, Request, Response, RequestHandler, ErrorRequestHandler, NextFunction } from "express";
 const session = require('express-session')
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session)
@@ -14,7 +16,7 @@ const helpers = require('./helpers')
 const errorHandlers = require('./handlers/errorHandlers')
 
 // create Express app
-const app = express()
+const app: Application = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -24,7 +26,7 @@ app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Allows CORS
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction): Response => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept')
   if (req.method === 'OPTIONS') {
@@ -40,8 +42,6 @@ app.use(morgan('dev'))
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-//
 
 // Exposes a bunch of methods for validating data.
 app.use(expressValidator())
@@ -59,21 +59,21 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
-// // Passport JS handles logins
+// Passport JS handles logins
 app.use(passport.initialize())
 app.use(passport.session())
 
 // pass variables to our templates + all requests
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.locals.h = helpers
-  res.locals.user = req.user || null
+  // res.locals.user = req.user || null
   res.locals.currentPath = req.path
   next()
 })
 
 // promisify some callback based APIs
-app.use((req, res, next) => {
-  req.login = promisify(req.login, req)
+app.use((req: Request, res: Response, next: NextFunction) => {
+  // req.login = promisify(req.login, req)
   next()
 })
 

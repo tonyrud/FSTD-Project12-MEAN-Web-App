@@ -42,4 +42,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/config/env/variables.env
+/app/config/.env
