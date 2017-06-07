@@ -92,9 +92,7 @@ module.exports = {
         "enforce": "pre",
         "test": /\.js$/,
         "loader": "source-map-loader",
-        "exclude": [
-          /\/node_modules\//
-        ]
+        exclude: [/node_modules/, /build/, /__test__/] // added this line to remove warnings with material source maps
       },
       {
         "test": /\.json$/,
