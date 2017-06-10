@@ -7,11 +7,9 @@ import { LoginComponent } from './login/login.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule,
-    SharedModule
+    MaterialModule
   ],
   declarations: [
-    LoginComponent
   ]
 })
 export class ComponentsModule { }
