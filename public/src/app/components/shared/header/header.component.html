@@ -2,18 +2,20 @@
 
   <button md-button routerLink="/">
     <md-icon>home</md-icon> 
-        {{title}}
+       <h2>
+        {{ title }}
+      </h2> 
   </button>
 
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button md-button routerLink="/login">Products</button>
-    <button md-button routerLink="/dashboard">Dashboard</button>
+    <button md-button routerLink="login" routerLinkActive="active">Signup</button>
+    <button md-button routerLink="dashboard" routerLinkActive="active">Login</button>
   </div>
   <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
      <md-icon>menu</md-icon>
-    </button>
+  </button>
 
 </md-toolbar>
 <md-menu x-position="before" #menu="mdMenu">

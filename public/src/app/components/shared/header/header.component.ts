@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConfigService } from '../../../_services/app.config.service';
 
 @Component({
   selector: 'shared-header',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private title: string
 
-  constructor() { }
+  constructor(
+    private config: AppConfigService
+  ) { }
 
   ngOnInit() {
+    this.title = this.config.appName
   }
 
 }
