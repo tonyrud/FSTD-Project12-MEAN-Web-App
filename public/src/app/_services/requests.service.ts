@@ -7,17 +7,17 @@ import { AppConfigService } from './app.config.service';
 @Injectable()
 export class RequestsService {
   // hold api server string
-  private apiServer: string
+  private API_URL: string
 
   constructor(
     private http: Http,
     private configService: AppConfigService
   ) {
-    this.apiServer = configService.config.apiServer
+    this.API_URL = configService.apiUrl
    }
 
   public apiGet(endpoint: string): Observable<any> {
-    return this.http.get(this.apiServer + endpoint).map((response: Response) => response.json())
+    return this.http.get(this.API_URL + endpoint).map((response: Response) => response.json())
   }
 
   // public apiPost(endpoint: string, body: any) {

@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { APP_CONFIG } from './../../../app.config';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable()
 export class AppConfigService {
-  private applicationConfig = APP_CONFIG
+  private applicationConfig = environment
   constructor() { }
 
   public get config () {
     return this.applicationConfig
+  }
+
+  public get apiUrl () {
+    return this.applicationConfig.apiUrl
   }
 }
