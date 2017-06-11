@@ -10,9 +10,9 @@ router.get('/', (req, res) => {
 // Users routes
 router.get('/users', catchAsyncErrors(userController.getUsers))
 
-// // validate registration data
-// // register the user
-// // we need to log them in
+// validate registration data
+// register the user
+// we need to log them in
 // router.post('/register',
 //   userController.validateRegister,
 //   userController.register,

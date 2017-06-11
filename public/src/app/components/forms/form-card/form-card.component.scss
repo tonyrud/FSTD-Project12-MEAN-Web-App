@@ -11,6 +11,9 @@
     min-width: 390px;
 }
 
-.mat-card-title {
-  font-weight: 700;
+.mat-card-header {
+    .mat-card-title {
+        font-weight: 700;
+        font-size: 1.2em;
+    }
 }
