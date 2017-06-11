@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import './_partials/_reset';
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-@import './_partials/_reset'
+@import './_partials/_globals';
