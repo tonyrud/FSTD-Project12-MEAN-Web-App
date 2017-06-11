@@ -14,10 +14,10 @@ export class AppComponent {
   ) {this.init()}
   
   init () {
-    this.api.apiGet('users').subscribe(
-      users => {
-        this.users = users.users
-      }
-    )
+    // this.api.apiGet('users').subscribe(
+    //   users => {
+    //     this.users = users.users
+    //   }
+    // )
   }
 }

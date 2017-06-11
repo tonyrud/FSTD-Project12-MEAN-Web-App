@@ -1,10 +1,12 @@
 <div class="card-form">
-  <form-card [formTitle]='"Login"' [btnPrimary]='"Login"' [btnSecondary]='"Forgot Password"'>
-    <md-input-container>
-      <input mdInput placeholder="email" type="email" value="">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="password" type="password" value="">
-    </md-input-container>
-  </form-card>
+  <form #f='ngForm' novalidate>
+    <form-card [formTitle]='"Login"' [btnPrimary]='"Login"' [btnSecondary]='"Forgot Password"' (primaryClicked)="loginSubmit(f, $event)" (secondaryClicked)="forgotPassword($event)">
+      <md-input-container>
+        <input name="email" #email="ngModel" [(ngModel)]="form.email" mdInput placeholder="email" type="email" value="">
+      </md-input-container>
+      <md-input-container>
+        <input name="password" #password="ngModel" [(ngModel)]="form.password" mdInput placeholder="password" type="password" value="">
+      </md-input-container>
+    </form-card>
+  </form>
 </div>

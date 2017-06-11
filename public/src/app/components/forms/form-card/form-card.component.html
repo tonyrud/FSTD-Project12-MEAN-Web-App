@@ -14,8 +14,8 @@
         </md-input-container>-->
       </md-card-content>
       <md-card-actions>
-        <button md-button>{{ btnPrimary }}</button>
-        <button md-button>{{ btnSecondary }}</button>
+        <button (click)="submitPrimary()" md-button>{{ btnPrimary }}</button>
+        <button (click)="submitSecondary()" md-button>{{ btnSecondary }}</button>
       </md-card-actions>
     </md-card>
   </div>

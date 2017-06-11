@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'form-card',
@@ -10,9 +10,20 @@ export class FormCardComponent implements OnInit {
   @Input() btnPrimary
   @Input() btnSecondary
 
+  @Output() primaryClicked = new EventEmitter()
+  @Output() secondaryClicked = new EventEmitter()
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submitPrimary () {
+    this.primaryClicked.emit('primary submitted')
+  }
+
+  submitSecondary () {
+    this.secondaryClicked.emit('secondary submitted')
   }
 
 }
