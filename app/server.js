@@ -1,6 +1,4 @@
-// con
-import * as express from 'express';
-import { Application, Request, Response, RequestHandler, ErrorRequestHandler, NextFunction } from "express";
+const express = require('express')
 const session = require('express-session')
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session)
@@ -16,7 +14,7 @@ const helpers = require('./helpers')
 const errorHandlers = require('./handlers/errorHandlers')
 
 // create Express app
-const app: Application = express()
+const app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -26,7 +24,7 @@ app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Allows CORS
-app.use((req: Request, res: Response, next: NextFunction): Response => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept')
   if (req.method === 'OPTIONS') {
@@ -43,7 +41,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// Exposes a bunch of methods for validating data.
+// Exposes a bunch of methods for validating data. Used in usersController.validateRegister
 app.use(expressValidator())
 
 // populates req.cookies with any cookies that came along with the request
@@ -64,7 +62,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // pass variables to our templates + all requests
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req, res, next) => {
   res.locals.h = helpers
   // res.locals.user = req.user || null
   res.locals.currentPath = req.path
@@ -72,7 +70,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 })
 
 // promisify some callback based APIs
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req, res, next) => {
   // req.login = promisify(req.login, req)
   next()
 })

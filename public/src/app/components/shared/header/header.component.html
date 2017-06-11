@@ -1,8 +1,8 @@
 <md-toolbar color="primary">
-  <h2 class="pointer">{{ title }}</h2> 
+  <h2 class="pointer" routerLink="/">{{ title }}</h2> 
   <span class="fill-remaining-space"></span>
   <div *ngIf="!user" fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button md-button routerLink="login" routerLinkActive="active">Signup</button>
+    <button md-button routerLink="register" routerLinkActive="active">Register</button>
     <button md-button routerLink="login" routerLinkActive="active">Login</button>
   </div>
   <button *ngIf="user" md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>

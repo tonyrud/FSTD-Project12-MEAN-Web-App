@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "prod": "node ./start.js",
-    "watch": "nodemon -w app -e \".ts\" --exec",
+    "watch": "nodemon ./app/start.js --ignore public/",
     "node-typescript": "ts-node ./app/start.ts",
-    "start": "npm run watch \"npm run node-typescript\"",
+    "start": "npm run watch",
     "start-client": "webpack-dev-server --port=4200",
     "seed": "node ./app/data/load-sample-data.js",
     "delete-db-data": "node ./data/load-sample-data.js --delete"

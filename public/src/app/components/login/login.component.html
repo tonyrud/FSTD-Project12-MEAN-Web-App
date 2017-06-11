@@ -1,23 +1,10 @@
-<div class="login-container">
-  <div class="card card-login">
-    <md-card>
-      <md-card-header>
-        <md-card-title>Login</md-card-title>
-      </md-card-header>
-
-      <md-card-content>
-        <md-input-container>
-          <input mdInput placeholder="email" value="">
-        </md-input-container>
-        <md-input-container>
-          <input mdInput placeholder="password" value="">
-        </md-input-container>
-      </md-card-content>
-      <md-card-actions>
-        <button md-button>Login</button>
-        <button md-button>Reset Password</button>
-      </md-card-actions>
-    </md-card>
-  </div>
-
+<div class="card-form">
+  <form-card [formTitle]='"Login"' [btnPrimary]='"Login"' [btnSecondary]='"Forgot Password"'>
+    <md-input-container>
+      <input mdInput placeholder="email" type="email" value="">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="password" type="password" value="">
+    </md-input-container>
+  </form-card>
 </div>

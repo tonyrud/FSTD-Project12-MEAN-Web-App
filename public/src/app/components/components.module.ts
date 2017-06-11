@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
-import { SharedModule } from './shared/shared.module';
-import { LoginComponent } from './login/login.component';
+import { FormCardComponent } from './forms/form-card/form-card.component';
 
 @NgModule({
   imports: [
@@ -10,6 +9,10 @@ import { LoginComponent } from './login/login.component';
     MaterialModule
   ],
   declarations: [
+    FormCardComponent
+  ],
+  exports: [
+    FormCardComponent
   ]
 })
 export class ComponentsModule { }

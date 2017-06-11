@@ -11,3 +11,7 @@ exports.login = async (req, res) => {
   const users = await User.find({})
   res.json({ users })
 }
+
+exports.validateRegister = (req, res, next) => {
+  req.sanitizeBody('name')
+}

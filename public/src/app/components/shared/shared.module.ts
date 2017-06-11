@@ -13,7 +13,7 @@ import { MaterialModule } from '../../material/material.module';
     RouterModule
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
   ],
   exports: [
     HeaderComponent

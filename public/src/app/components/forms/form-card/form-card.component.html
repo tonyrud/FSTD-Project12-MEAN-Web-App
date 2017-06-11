@@ -1,0 +1,21 @@
+<div class="form-card">
+  <md-card>
+      <md-card-header>
+        <md-card-title>{{ formTitle }}</md-card-title>
+      </md-card-header>
+
+      <md-card-content>
+          <ng-content class="form-card__inputs"></ng-content>
+        <!--<md-input-container>
+          <input mdInput placeholder="email" value="">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="password" value="">
+        </md-input-container>-->
+      </md-card-content>
+      <md-card-actions>
+        <button md-button>{{ btnPrimary }}</button>
+        <button md-button>{{ btnSecondary }}</button>
+      </md-card-actions>
+    </md-card>
+  </div>

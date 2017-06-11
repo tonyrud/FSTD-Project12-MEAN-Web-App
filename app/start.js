@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-import { Application } from "express";
-
 
 // Make sure node 7.6+ for async functions
 const [major, minor] = process.versions.node.split('.').map(parseFloat)
@@ -24,7 +22,7 @@ mongoose.connection.on('error', (err) => {
 require('./models/User')
 
 // Start api server
-const app: Application = require('./server.ts')
+const app = require('./server.js')
 app.set('port', process.env.API_PORT || 4200)
 const server = app.listen(app.get('port'), () => {
   console.log(`Express API running → PORT ${server.address().port}`)

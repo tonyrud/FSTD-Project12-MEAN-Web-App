@@ -1,0 +1,16 @@
+.form-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+.mat-card-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 390px;
+}
+
+.mat-card-title {
+  font-weight: 700;
+}

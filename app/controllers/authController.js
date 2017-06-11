@@ -1,5 +1,5 @@
 const passport = require('passport')
-import * as mongoose from 'mongoose'
+const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const crypto = require('crypto')
 const promisify = require('es6-promisify')
