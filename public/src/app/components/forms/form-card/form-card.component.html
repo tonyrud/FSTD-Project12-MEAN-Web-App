@@ -5,13 +5,8 @@
       </md-card-header>
 
       <md-card-content>
-          <ng-content class="form-card__inputs"></ng-content>
-        <!--<md-input-container>
-          <input mdInput placeholder="email" value="">
-        </md-input-container>
-        <md-input-container>
-          <input mdInput placeholder="password" value="">
-        </md-input-container>-->
+        <!-- project inputs here -->
+        <ng-content class="form-card__inputs"></ng-content>
       </md-card-content>
       <md-card-actions>
         <button (click)="submitPrimary()" md-button>{{ btnPrimary }}</button>

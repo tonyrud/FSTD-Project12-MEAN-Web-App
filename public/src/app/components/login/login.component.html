@@ -1,12 +1,22 @@
 <div class="card-form">
-  <form #f='ngForm' novalidate>
+  <form [formGroup]='loginForm' class="card-form__form" novalidate>
     <form-card [formTitle]='"Login"' [btnPrimary]='"Login"' [btnSecondary]='"Forgot Password"' (primaryClicked)="loginSubmit(f, $event)" (secondaryClicked)="forgotPassword($event)">
       <md-input-container>
-        <input name="email" #email="ngModel" [(ngModel)]="form.email" mdInput placeholder="email" type="email" value="">
+        <input name="email" #email formControlName="email" mdInput placeholder="email" type="email" autocomplete="off">
       </md-input-container>
+      <div class="card-form__form--error error">
+        <div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.get('email').touched">
+          Email is required
+        </div>
+      </div>
       <md-input-container>
-        <input name="password" #password="ngModel" [(ngModel)]="form.password" mdInput placeholder="password" type="password" value="">
+        <input name="password" formControlName="password" mdInput placeholder="password" type="password" autocomplete="off">
       </md-input-container>
+      <div class="card-form__form--error error">
+        <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.get('password').touched">
+          Password is required
+        </div>
+      </div>
     </form-card>
   </form>
 </div>

@@ -1,16 +1,27 @@
 <div class="card-form">
-  <form-card [formTitle]='"Register an Account"' [btnPrimary]='"Signup"' [btnSecondary]='"Cancel"'>
-    <md-input-container>
-      <input mdInput placeholder="first name" type="text" value="">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="last name" type="text" value="">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="email" type="email" value="">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="password" type="password" value="">
-    </md-input-container>
-  </form-card>
+  <form [formGroup]='registerForm' class="card-form__form" novalidate>
+    <form-card [formTitle]='"Register an Account"' [btnPrimary]='"Signup"' [btnSecondary]='"Cancel"' (primaryClicked)="registerSubmit($event)"
+      (secondaryClicked)="cancelRegister($event)">
+      <md-input-container>
+        <input name="firstName" formControlName="firstName" mdInput placeholder="first name" type="text" autocomplete="off">
+      </md-input-container>
+      <div class="card-form__form--error error">
+        <div *ngIf="registerForm.controls['firstName'].hasError('required') && registerForm.get('firstName').touched">
+          First name is required
+        </div>
+      </div>
+      <md-input-container>
+        <input formControlName="lastName" mdInput placeholder="last name" type="text" autocomplete="off">
+      </md-input-container>
+      <md-input-container>
+        <input formControlName="email" mdInput placeholder="email" type="email" autocomplete="off">
+      </md-input-container>
+      <md-input-container>
+        <input formControlName="password" mdInput placeholder="password" type="password" autocomplete="off">
+      </md-input-container>
+      <md-input-container>
+        <input formControlName="confirmPassword" mdInput placeholder="confrim password" type="password" autocomplete="off">
+      </md-input-container>
+    </form-card>
+  </form>
 </div>
