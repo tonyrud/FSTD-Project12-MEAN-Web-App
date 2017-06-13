@@ -13,10 +13,10 @@ router.get('/users', catchAsyncErrors(userController.getUsers))
 // validate registration data
 // register the user
 // we need to log them in
-// router.post('/register',
-//   userController.validateRegister,
-//   userController.register,
-//   authController.login
-// )
+router.post('/register',
+  userController.validateRegister,
+  userController.register
+  // authController.login
+)
 
 module.exports = router

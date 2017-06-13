@@ -15,16 +15,18 @@ const userSchema = new Schema({
     validate: [validator.isEmail, 'Invalid email address'],
     required: 'Please supply an email address'
   },
-  name: {
+  firstName: {
     type: String,
-    required: 'Please supply a name',
+    required: 'Please supply a first name',
+    trim: true
+  },
+  lastName: {
+    type: String,
+    required: 'Please supply a last name',
     trim: true
   },
   resetPasswordToken: String,
-  resetPasswordExpires: Date,
-  hearts: [
-    { type: mongoose.Schema.ObjectId, ref: 'Store' }
-  ]
+  resetPasswordExpires: Date
 })
 
 userSchema.virtual('gravatar').get(function () {

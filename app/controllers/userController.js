@@ -14,8 +14,8 @@ exports.login = async (req, res) => {
 
 exports.validateRegister = (req, res, next) => {
   // user express validator methods
-  req.sanitizeBody('name')
-  req.checkBody('name', 'You must supply a name!').notEmpty()
+  req.sanitizeBody('firstName')
+  req.checkBody('firstName', 'You must supply a name!').notEmpty()
   req.checkBody('email', 'That Email is not valid!').isEmail()
   req.sanitizeBody('email').normalizeEmail({
     remove_dots: false,
@@ -23,14 +23,26 @@ exports.validateRegister = (req, res, next) => {
     gmail_remove_subaddress: false
   })
   req.checkBody('password', 'Password Cannot be Blank!').notEmpty()
-  req.checkBody('password-confirm', 'Confirmed Password cannot be blank!').notEmpty()
-  req.checkBody('password-confirm', 'Oops! Your passwords do not match').equals(req.body.password)
+  req.checkBody('confirmPassword', 'Confirmed Password cannot be blank!').notEmpty()
+  req.checkBody('confirmPassword', 'Oops! Your passwords do not match').equals(req.body.password)
 
   const errors = req.validationErrors()
   if (errors) {
-    req.flash('error', errors.map(err => err.msg))
-    res.render('register', { title: 'Register', body: req.body, flashes: req.flash() })
-    return // stop the fn from running
+    // res.json({ errors })
+    next(errors)
+    // return // stop the fn from running
   }
   next() // there were no errors!
+}
+
+exports.register = async (req, res, next) => {
+  const user = new User({
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
+  })
+  const register = promisify(User.register, User)
+  await register(user, req.body.password)
+  res.json({ key: 'login worked', user })
+  // next() // pass to authController.login
 }

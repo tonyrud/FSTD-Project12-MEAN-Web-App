@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UsersService } from '../../_services/users.service';
 
 @Component({
   selector: 'register',
@@ -11,7 +12,8 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _users: UsersService
   ) { }
 
   ngOnInit() {
@@ -25,7 +27,14 @@ export class RegisterComponent implements OnInit {
   }
 
   registerSubmit(event) {
-    console.log(this.registerForm.valid)
+    this._users.registerUser(this.registerForm.value).subscribe(
+      res => {
+        debugger
+      },
+      error => {
+        console.log('error registering user:', error)
+      }
+    )
   }
 
   cancelRegister(event) {

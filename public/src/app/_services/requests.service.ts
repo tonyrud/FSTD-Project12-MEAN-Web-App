@@ -11,18 +11,18 @@ export class RequestsService {
 
   constructor(
     private http: Http,
-    private configService: AppConfigService
+    private _configService: AppConfigService
   ) {
-    this.API_URL = configService.apiUrl
+    this.API_URL = _configService.apiUrl
    }
 
   public apiGet(endpoint: string): Observable<any> {
     return this.http.get(this.API_URL + endpoint).map((response: Response) => response.json())
   }
 
-  // public apiPost(endpoint: string, body: any) {
-  //   return this.http.post(APP_CONFIG.apiServer + endpoint, body, this.userHeader()).map((response: Response) => response.json())
-  // }
+  public apiPost(endpoint: string, body: any): Observable<any> {
+    return this.http.post(this.API_URL + endpoint, body).map((response: Response) => response.json())
+  }
 
   // public apiPut(endpoint: string, body: any) {
   //   return this.http.put(APP_CONFIG.apiServer + endpoint, body, this.userHeader()).map((response: Response) => response.json())
