@@ -4,6 +4,10 @@
   "description": "",
   "scripts": {
     "prod": "node ./start.js",
+    "test": "karma start ./public/karma.conf.js",
+    "build": "webpack",
+    "lint": "ng lint",
+    "e2e": "protractor ./protractor.conf.js",
     "watch": "nodemon ./app/start.js --ignore public/",
     "node-typescript": "ts-node ./app/start.ts",
     "start": "npm run watch",
