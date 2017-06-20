@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { UsersService } from '../../_services/users.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'register',
@@ -9,14 +10,19 @@ import { UsersService } from '../../_services/users.service';
 })
 export class RegisterComponent implements OnInit {
   private registerForm: FormGroup
-
+  private returnUrl: string;
 
   constructor(
     private _fb: FormBuilder,
-    private _users: UsersService
+    private _users: UsersService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
     this.registerForm = this._fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
@@ -29,7 +35,7 @@ export class RegisterComponent implements OnInit {
   registerSubmit(event) {
     this._users.registerUser(this.registerForm.value).subscribe(
       res => {
-        debugger
+        this.router.navigate([this.returnUrl])
       },
       error => {
         console.log('error registering user:', error)
@@ -38,7 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   cancelRegister(event) {
-    console.log(event)
+    this.router.navigate(['login'])
   }
 
 }

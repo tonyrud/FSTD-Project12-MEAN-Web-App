@@ -25,9 +25,13 @@ exports.notFound = (req, res, next) => {
   In development, show error messages related to pug views
 */
 exports.developmentErrors = (err, req, res, next) => {
-  console.log(err)
   res.status(err.status || 500)
-  res.json(err)
+  if (err.status === 500) {
+    res.json(err)
+  } else {
+    const errors = err.map(error => ({msg: error.msg}))
+    res.json(errors)
+  }
   // err.stack = err.stack || ''
   // const errorDetails = {
   //   message: err.message,
