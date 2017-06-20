@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const promisify = require('es6-promisify')
+// const passport = require('passport')
 
 exports.getUsers = async (req, res) => {
   const users = await User.find({})
@@ -8,8 +9,12 @@ exports.getUsers = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-  const users = await User.find({})
-  res.json({ users })
+  const user = req.user
+  res.json({ user })
+}
+
+exports.logout = async (req, res) => {
+  res.json({ msg: 'logged out' })
 }
 
 exports.validateRegister = (req, res, next) => {
@@ -43,5 +48,5 @@ exports.register = async (req, res, next) => {
   })
   const register = promisify(User.register, User)
   await register(user, req.body.password)
-  res.json({ key: 'login worked', user })
+  res.json({ user })
 }

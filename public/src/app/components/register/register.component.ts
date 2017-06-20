@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
   registerSubmit(event) {
     this._users.registerUser(this.registerForm.value).subscribe(
       res => {
+        console.log(res)
         this.router.navigate([this.returnUrl])
       },
       error => {
