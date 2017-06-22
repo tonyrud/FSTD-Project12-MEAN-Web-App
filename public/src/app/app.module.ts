@@ -14,6 +14,7 @@ import { AppRoutingModule, routedComponents } from './app.routing.module';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { SharedModule } from './components/shared/shared.module';
 import { MaterialModule } from './material/material.module';
+import { GuardsModule } from './_guards/guards.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MaterialModule } from './material/material.module';
     ComponentsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    GuardsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

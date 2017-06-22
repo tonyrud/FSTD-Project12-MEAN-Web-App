@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.title = this._config.appName
 
+    // get signed in user, sets header variable to switch login/logout buttons
+    this.user = this._user.getSignedUser()
+    
+    // watcher for sign in / signout
     this._user.getUser().subscribe(user => {
       // set template user to return user parameter
       this.user = user

@@ -1,21 +1,15 @@
 <md-toolbar color="primary">
-  <h2 class="pointer" routerLink="/">{{ title }}</h2> 
+  <h4 class="pointer" routerLink="home">{{ title }}</h4>
   <span class="fill-remaining-space"></span>
   <div *ngIf="!user; else loggedin" fxLayout="row" fxShow="false" fxShow.gt-sm>
     <button md-button routerLink="register" routerLinkActive="active">Register</button>
     <button md-button routerLink="login" routerLinkActive="active">Login</button>
   </div>
   <ng-template #loggedin>
-    <button md-button>Hello, {{ user.firstName }}</button>
-    <button md-button routerLink="login" routerLinkActive="active">Logout</button>
+    <button md-button routerLink="locations" routerLinkActive="active">Locations</button>
+    <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>Hello, {{ user.firstName }}</button>
   </ng-template>
-  <button *ngIf="user" md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-     <md-icon>menu</md-icon>
-  </button>
-
 </md-toolbar>
 <md-menu x-position="before" #menu="mdMenu">
-  <button md-menu-item routerLink="/products">Products</button>
-  <button md-menu-item routerLink="/dashboard">Dashboard</button>
-  <!--<button md-menu-item>Help</button>-->
+  <button md-menu-item routerLink="login">Logout</button>
 </md-menu>
