@@ -19,6 +19,14 @@ export class UsersService {
     return this._reqService.apiPost(`register`, user)
   }
 
+  forgotPassword(email: string) {
+    return this._reqService.apiPost(`forgot`, email)
+  }
+
+  resetPassword(password: string, token: string) {
+    return this._reqService.apiPost(`resetPassword`, {password, token})
+  }
+
   // get the currently signed in user from local storage
   public getSignedUser(): User {
     return JSON.parse(localStorage.getItem('currentUser'))

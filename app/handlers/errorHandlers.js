@@ -32,21 +32,7 @@ exports.developmentErrors = (err, req, res, next) => {
     const errors = err.map(error => ({msg: error.msg}))
     res.json(errors)
   }
-  // err.stack = err.stack || ''
-  // const errorDetails = {
-  //   message: err.message,
-  //   status: err.status,
-  //   stackHighlighted: err.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>')
-  // }
-  // res.format({
-  //   // Based on the `Accept` http header
-  //   'text/html': () => {
-  //     console.log(errorDetails)
-  //     res.json({'error': errorDetails})
-  //   }, // Form Submit, Reload the page
-  //   'application/json': () => res.json(errorDetails) // Ajax call, send JSON back
-  // })
-};
+}
 
 /*
   Production Error Handler

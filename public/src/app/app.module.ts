@@ -36,6 +36,8 @@ import { GuardsModule } from './_guards/guards.module';
     GuardsModule
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

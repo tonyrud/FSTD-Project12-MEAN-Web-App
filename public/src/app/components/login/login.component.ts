@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  loginSubmit (form, event) {
-    // console.log(this.loginForm.value)
+  loginSubmit(form, event) {
     this._auth.login(this.loginForm.value).subscribe(
       () => {
         this._user.sendUser()
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  forgotPassword (event) {
-    console.log(event)
+  forgotPassword(event) {
+    this.router.navigate(['forgot-password'])
   }
 }

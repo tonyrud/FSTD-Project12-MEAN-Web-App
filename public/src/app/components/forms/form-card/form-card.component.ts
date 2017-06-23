@@ -13,9 +13,15 @@ export class FormCardComponent implements OnInit {
   @Output() primaryClicked = new EventEmitter()
   @Output() secondaryClicked = new EventEmitter()
 
+  private showSecondaryBtn: boolean = true
+
   constructor() { }
 
   ngOnInit() {
+    // turn off secondary button if there is not input
+    if (!this.btnSecondary) {
+      this.showSecondaryBtn = false
+    }
   }
 
   submitPrimary () {

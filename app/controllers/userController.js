@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const promisify = require('es6-promisify')
+const mail = require('../handlers/mail')
+const crypto = require('crypto')
 // const passport = require('passport')
 
 exports.getUsers = async (req, res) => {
@@ -14,6 +16,7 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
+  req.logout()
   res.json({ msg: 'logged out' })
 }
 
@@ -49,4 +52,64 @@ exports.register = async (req, res, next) => {
   const register = promisify(User.register, User)
   await register(user, req.body.password)
   res.json({ user })
+}
+
+exports.forgot = async (req, res) => {
+  // see if a user with email
+  const user = await User.findOne({ email: req.body.email })
+  if (!user) {
+    return res.json({msg: 'no user with that account'})
+  }
+  // set reset token
+  user.resetPasswordToken = crypto.randomBytes(20).toString('hex')
+  user.resetPasswordExpires = Date.now() + 3600000 // expires in 1hr
+  await user.save()
+  // send email with token
+  const resetURL = `localhost:${process.env.CLIENT_PORT}/account/reset/${user.resetPasswordToken}`
+  // await mail.send({
+  //   user,
+  //   subject: 'Password Reset',
+  //   resetURL,
+  //   filename: 'password-reset'
+  // })
+
+  res.json({msg: 'You have been emailed a password reset link.', url: resetURL})
+}
+
+exports.reset = async (req, res) => {
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token,
+    resetPasswordExpires: { $gt: Date.now() } // check if database value is greater than now
+  })
+  if (!user) {
+    return res.json({msg: 'Password reset is invalid or has expired'})
+  }
+  // if user, show reset password form
+  res.json('reset', { msg: 'Reset your password' })
+}
+
+exports.confirmedPasswords = (req, res, next) => {
+  if (req.body.password === req.body['password-confirm']) {
+    console.log('passwords match')
+    next()
+  }
+  // res.redirect('back')
+}
+
+exports.update = async (req, res, next) => {
+  const user = await User.findOne({
+    resetPasswordToken: req.params.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  })
+  if (!user) {
+    return res.json({msg: 'Password reset is invalid or has expired'})
+  }
+
+  const setPassword = promisify(user.setPassword, user)
+  await setPassword(req.body.password)
+  // remove fields from mongodb
+  user.resetPasswordToken = undefined
+  user.resetPasswordExpires = undefined
+  const updatedUser = await user.save()
+  res.json({user: updatedUser})
 }

@@ -11,19 +11,19 @@ router.get('/', (req, res) => {
 // Users routes
 router.get('/users', catchAsyncErrors(userController.getUsers))
 
-// validate registration data
-// register the user
-// we need to log them in
 router.post('/register',
+// validate registration data
   userController.validateRegister,
+// register the user
   userController.register
-  // authController.login
 )
 
 router.post('/login',
   passport.authenticate('local'),
   userController.login
 )
+router.post('/forgot', catchAsyncErrors(userController.forgot))
+router.post('/resetPassword/:token', userController.confirmedPasswords, catchAsyncErrors(userController.forgot))
 router.get('/logout', userController.logout)
 
 module.exports = router
