@@ -72,13 +72,13 @@ module.exports = {
   },
   "entry": {
     "main": [
-      "./public/src\\main.ts"
+      "./public/src/main.ts"
     ],
     "polyfills": [
-      "./public/src\\polyfills.ts"
+      "./public/src/polyfills.ts"
     ],
     "styles": [
-      "./public/src/styles\\styles.scss"
+      "./public/src/styles/styles.scss"
     ]
   },
   "output": {
