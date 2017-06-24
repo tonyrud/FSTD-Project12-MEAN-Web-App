@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prod": "npm run build && node start.js",
+    "prod": "node start.js",
     "test": "karma start ./public/karma.conf.js",
     "build": "webpack",
     "lint": "ng lint",
@@ -16,7 +16,7 @@
     "start-client": "webpack-dev-server --port=4200",
     "seed": "node ./app/data/load-sample-data.js",
     "delete-db-data": "node ./data/load-sample-data.js --delete",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
