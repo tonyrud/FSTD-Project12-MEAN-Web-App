@@ -26,17 +26,13 @@ exports.notFound = (req, res, next) => {
 */
 exports.developmentErrors = (err, req, res, next) => {
   console.log('----error passed to dev errors')
-  res.status(err.status || 500).json({'error': err.msg})
-  // if (err.status === 500) {
-  //   res.json(err)
-  // } else {
-  //   if (Array.isArray(err)) {
-  //     const errors = err.map(error => ({msg: error.msg}))
-  //     res.json(errors)
-  //   } else {
-  //     res.json(err)
-  //   }
-  // }
+  err.stack = err.stack || ''
+  const errorDetails = {
+    message: err.message,
+    status: err.status,
+    stackHighlighted: err.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>')
+  }
+  res.status(err.status || 500).json({'error': errorDetails})
 }
 
 /*
@@ -50,4 +46,4 @@ exports.productionErrors = (err, req, res, next) => {
     message: err.message,
     error: {}
   })
-};
+}

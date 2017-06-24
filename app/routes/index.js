@@ -5,8 +5,10 @@ const passport = require('passport')
 const userController = require('./../controllers/userController')
 const { catchAsyncErrors } = require('./../handlers/errorHandlers')
 
-router.get('/', (req, res) => {
-  res.send('API root. Nothing here')
+router.get('/', (req, res, next) => {
+  const err = new Error('empty api route')
+  // err.status = 401
+  next(err)
 })
 // Users routes
 router.get('/users', catchAsyncErrors(userController.getUsers))
