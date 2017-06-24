@@ -23,7 +23,8 @@
     "url": "git+https://github.com/tonyrud/FSTD-Project12-MEAN-Web-App.git"
   },
   "engines": {
-    "node": "7.10.0"
+    "node": "7.10.0",
+    "npm": "4.2.0"
   },
   "author": "Anthony Rudny",
   "license": "ISC",
