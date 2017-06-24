@@ -29,8 +29,12 @@ exports.developmentErrors = (err, req, res, next) => {
   if (err.status === 500) {
     res.json(err)
   } else {
-    const errors = err.map(error => ({msg: error.msg}))
-    res.json(errors)
+    if (Array.isArray(err)) {
+      const errors = err.map(error => ({msg: error.msg}))
+      res.json(errors)
+    } else {
+      res.json(err)
+    }
   }
 }
 
