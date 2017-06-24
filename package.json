@@ -5,7 +5,7 @@
   "scripts": {
     "prod": "node start.js",
     "test": "karma start ./public/karma.conf.js",
-    "build": "webpack",
+    "build": "webpack -p",
     "lint": "ng lint",
     "e2e": "protractor ./protractor.conf.js",
     "watch-server": "nodemon ./start.js --ignore public/",
@@ -15,8 +15,7 @@
     "start-app": "npm run watch-server",
     "start-client": "webpack-dev-server --port=4200",
     "seed": "node ./app/data/load-sample-data.js",
-    "delete-db-data": "node ./data/load-sample-data.js --delete",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "delete-db-data": "node ./data/load-sample-data.js --delete"
   },
   "repository": {
     "type": "git",
