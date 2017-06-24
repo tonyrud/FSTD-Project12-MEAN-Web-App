@@ -10,7 +10,7 @@ if (major <= 7 && minor <= 5) {
 }
 
 // import environmental variables from variables.env file
-require('dotenv').config({ path: __dirname + '/config/.env'})
+require('dotenv').config({ path: __dirname + '/app/config/.env'})
 // Connect to cloud Database and handle bad connections
 mongoose.connect(process.env.DATABASE)
 mongoose.Promise = global.Promise // Tell Mongoose to use ES6 promises
@@ -19,10 +19,10 @@ mongoose.connection.on('error', (err) => {
 })
 
 // import models
-require('./models/User')
+require('./app/models/User')
 
 // Start api server
-const app = require('./server.js')
+const app = require('./app/server.js')
 app.set('port', process.env.PORT || 4200)
 const server = app.listen(app.get('port'), () => {
   console.log(`Express API running → PORT ${server.address().port}`)
