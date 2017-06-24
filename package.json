@@ -8,9 +8,10 @@
     "build": "webpack",
     "lint": "ng lint",
     "e2e": "protractor ./protractor.conf.js",
-    "watch": "nodemon ./app/start.js --ignore public/",
+    "watch-server": "nodemon ./app/start.js --ignore public/",
     "node-typescript": "ts-node ./app/start.ts",
-    "start": "npm run watch",
+    "start": "npm run watch-server",
+    "start-app": "npm run watch-server",
     "start-client": "webpack-dev-server --port=4200",
     "seed": "node ./app/data/load-sample-data.js",
     "delete-db-data": "node ./data/load-sample-data.js --delete"
@@ -18,6 +19,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tonyrud/FSTD-Project12-MEAN-Web-App.git"
+  },
+  "engines": {
+    "node": "7.10.0"
   },
   "author": "Anthony Rudny",
   "license": "ISC",
