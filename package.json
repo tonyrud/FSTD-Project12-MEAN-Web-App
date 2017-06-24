@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "prod": "node start.js",
+    "prod": "npm run build && node start.js",
     "test": "karma start ./public/karma.conf.js",
     "build": "webpack",
     "lint": "ng lint",
