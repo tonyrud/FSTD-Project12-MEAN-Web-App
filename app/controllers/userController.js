@@ -5,8 +5,14 @@ const mail = require('../handlers/mail')
 const crypto = require('crypto')
 // const passport = require('passport')
 
-exports.getUsers = async (req, res) => {
+exports.getUsers = async (req, res, next) => {
   const users = await User.find({})
+  if (!users) {
+    console.log('---error getting users')
+    let err = new Error('Email or password not provided.')
+    err.status = 401
+    next(err)
+  }
   res.json({ users })
 }
 

@@ -25,17 +25,18 @@ exports.notFound = (req, res, next) => {
   In development, show error messages related to pug views
 */
 exports.developmentErrors = (err, req, res, next) => {
-  res.status(err.status || 500)
-  if (err.status === 500) {
-    res.json(err)
-  } else {
-    if (Array.isArray(err)) {
-      const errors = err.map(error => ({msg: error.msg}))
-      res.json(errors)
-    } else {
-      res.json(err)
-    }
-  }
+  console.log('----error passed to dev errors')
+  res.status(err.status || 500).json({'error': err.msg})
+  // if (err.status === 500) {
+  //   res.json(err)
+  // } else {
+  //   if (Array.isArray(err)) {
+  //     const errors = err.map(error => ({msg: error.msg}))
+  //     res.json(errors)
+  //   } else {
+  //     res.json(err)
+  //   }
+  // }
 }
 
 /*
