@@ -13,7 +13,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppRoutingModule, routedComponents } from './app.routing.module';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { SharedModule } from './components/shared/shared.module';
-import { MaterialModule } from './material/material.module';
+import { MyMaterialModule } from './material/material.module';
 import { GuardsModule } from './_guards/guards.module';
 
 
@@ -32,7 +32,7 @@ import { GuardsModule } from './_guards/guards.module';
     ComponentsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule,
+    MyMaterialModule,
     GuardsModule
   ],
   providers: [],

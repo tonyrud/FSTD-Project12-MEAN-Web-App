@@ -1,15 +1,31 @@
 @import "~styles/_partials/_variables";
 
+.mat-input-container {
+    display: block;
+    margin: 3.5em auto;
+    width: 50%;
+}
+
+.select-container {
+    margin: 1em auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 360px;
+}
+
 .locations {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 .location {
     background: white;
     margin: 10px 0;
-    width: 40%;
+    width: 24%;
+    cursor: pointer;
     box-shadow: $shadow !important;
 
     &--wide {
@@ -33,4 +49,3 @@
         width: 100%;
     }
 }
-
