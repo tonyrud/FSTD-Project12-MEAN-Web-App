@@ -26,6 +26,11 @@ const locationSchema = new Schema({
   },
   lon: {
     type: Number
+  },
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+    // required: 'You must supply an author'
   }
 })
 

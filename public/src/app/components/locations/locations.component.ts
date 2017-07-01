@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { TrailsService } from '../../_services/trails.service'
 import { Location } from '../../_interfaces/location.interface';
+import { LocationsService } from '../../_services/locations.service';
 
 @Component({
   selector: 'locations',
@@ -25,7 +26,8 @@ export class LocationsComponent implements OnInit {
   ]
 
   constructor(
-    private _trails: TrailsService
+    private _trails: TrailsService,
+    private _locations: LocationsService
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,9 @@ export class LocationsComponent implements OnInit {
 
   saveLocation (location: Location) {
     console.log('location saved:', location)
+    this._locations.saveLocation(location).subscribe(savedLocation => {
+      console.log('returned save!')
+    })
   }
 
 }

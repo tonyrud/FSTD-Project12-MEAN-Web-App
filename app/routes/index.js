@@ -31,6 +31,6 @@ router.post('/resetPassword/:token',
 router.get('/logout', userController.logout)
 
 // Locations routes
-router.post('/locations', locationController.saveLocation)
+router.post('/locations', catchAsyncErrors(locationController.saveLocation))
 
 module.exports = router

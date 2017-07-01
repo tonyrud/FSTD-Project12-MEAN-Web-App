@@ -8,7 +8,7 @@
 
   <md-card-content>
     <p>
-      {{ location.description }}
+      {{ location.description.split(' ').slice(0, 25).join(' ') + '...' }}
     </p>
   </md-card-content>
   <md-card-actions>
