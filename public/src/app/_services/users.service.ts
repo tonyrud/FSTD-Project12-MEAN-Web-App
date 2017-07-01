@@ -10,7 +10,7 @@ export class UsersService {
   private subject = new Subject<any>();
 
   constructor(
-    private _reqService: RequestsService,
+    private _reqService: RequestsService
   ) { }
 
   registerUser(user: User) {

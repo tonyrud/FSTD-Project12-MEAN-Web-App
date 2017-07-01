@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 const Location = mongoose.model('Location')
 
-exports.createLocation = async (req, res, next) => {
-  res.json({})
+exports.saveLocation = async (req, res, next) => {
+  const location = new Location(req.body)
+
+  // save location in database
+  location.save()
+  res.json(location)
 }

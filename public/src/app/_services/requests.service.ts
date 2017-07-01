@@ -12,11 +12,15 @@ export class RequestsService {
   ) {}
 
   public apiGet(endpoint: string): Observable<any> {
-    return this.http.get(environment.apiUrl + endpoint).map((response: Response) => response.json())
+    return this.http.get(environment.apiUrl + endpoint)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
   }
 
   public apiPost(endpoint: string, body: any): Observable<any> {
-    return this.http.post(environment.apiUrl + endpoint, body).map((response: Response) => response.json())
+    return this.http.post(environment.apiUrl + endpoint, body)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
   }
 
   // public apiPut(endpoint: string, body: any) {
@@ -32,7 +36,9 @@ export class RequestsService {
   // }
 
   public trailApiGet(endpoint: string): Observable<any> {
-    return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader()).map((response: Response) => response.json())
+    return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader())
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
   }
 
   private trailHeader (): RequestOptions {
@@ -42,13 +48,18 @@ export class RequestsService {
     return new RequestOptions({headers})
   }
 
-  // private userHeader() {
-  //   let currentUser = JSON.parse(localStorage.getItem('currentUser'))
-  //   // create authorization header with auth token
-  //   if (currentUser && currentUser.auth_token) {
-  //     let headers = new Headers({ 'Authorization': currentUser.auth_token })
-  //     return new RequestOptions({ headers: headers })
-  //   }
-  // }
+  private handleError(error: Response | any) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error('ERR in requests.server.ts', errMsg);
+        return Observable.throw(errMsg);
+    }
 
 }

@@ -54,4 +54,8 @@ export class LocationsComponent implements OnInit {
     this.onSearchChange()
   }
 
+  saveLocation (location: Location) {
+    console.log('location saved:', location)
+  }
+
 }

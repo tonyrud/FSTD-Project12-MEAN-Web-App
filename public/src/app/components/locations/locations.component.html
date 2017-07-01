@@ -1,14 +1,9 @@
 <div class="inner">
   <h3 class="section-header">Hiking Locations</h3>
-  <form>
-
-  </form>
   <div class="search-container">
     <md-input-container class="example-full-width">
       <input [(ngModel)]="searchValue" (input)="onInput($event.target.value)" mdInput placeholder="Search for hiking locations">
     </md-input-container>
-  </div>
-  <div class="select-container">
     <md-select placeholder="Total Results" (change)="onTotalResults($event.value)" name="result" [(ngModel)]="selectedLimit">
       <md-option *ngFor="let result of resultsLimits" [value]="result.value">
         {{result.viewValue}}
@@ -19,11 +14,10 @@
         {{distance.viewValue}}
       </md-option>
     </md-select>
-
   </div>
   <!--<md-slider min="1" max="50" step="1" value="1"></md-slider>-->
   <div class="locations">
-    <location *ngFor="let item of locations; index as i;" class="location" [location]="item"></location>
+    <location *ngFor="let item of locations; index as i;" class="location" [location]="item" (saveLocation)="saveLocation($event)"></location>
   </div>
 </div>
 <form>

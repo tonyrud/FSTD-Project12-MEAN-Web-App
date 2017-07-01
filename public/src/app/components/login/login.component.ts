@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this._auth.login(this.loginForm.value).subscribe(
       () => {
         this._user.sendUser()
-        this.router.navigate(['locations'])
+        this.router.navigate(['search-locations'])
       },
       error => {
         console.error('err login in:', error)
