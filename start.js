@@ -20,6 +20,7 @@ mongoose.connection.on('error', (err) => {
 
 // import models
 require('./app/models/User')
+require('./app/models/Location')
 
 // Start api server
 const app = require('./app/server.js')

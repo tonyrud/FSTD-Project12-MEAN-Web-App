@@ -19,6 +19,12 @@ exports.notFound = (req, res, next) => {
   next(err)
 }
 
+// // Generic error handler used by all endpoints.
+// exports.handleAPIError(res, reason, message, code) {
+//   console.log("ERROR: " + reason);
+//   res.status(code || 500).json({"error": message});
+// }
+
 /*
   Development Error Hanlder
 
