@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { RequestsService } from './requests.service';
-import { AppConfigService } from './app.config.service';
 import { User } from '../_interfaces/user.interface';
 
 @Injectable()
@@ -12,7 +11,6 @@ export class UsersService {
 
   constructor(
     private _reqService: RequestsService,
-    private _config: AppConfigService
   ) { }
 
   registerUser(user: User) {

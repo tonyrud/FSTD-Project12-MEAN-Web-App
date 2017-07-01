@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConfigService } from '../../../_services/app.config.service';
 import { UsersService } from '../../../_services/users.service';
 import { User } from '../../../_interfaces/user.interface';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'shared-header',
@@ -13,12 +13,11 @@ export class HeaderComponent implements OnInit {
   private user: User
 
   constructor(
-    private _config: AppConfigService,
     private _user: UsersService
   ) { }
 
   ngOnInit() {
-    this.title = this._config.appName
+    this.title = environment.app_config.appName
 
     // get signed in user, sets header variable to switch login/logout buttons
     this.user = this._user.getSignedUser()

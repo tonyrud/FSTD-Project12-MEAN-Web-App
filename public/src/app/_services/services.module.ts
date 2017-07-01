@@ -9,7 +9,6 @@ import { TrailsService } from './trails.service';
 @NgModule({
   providers: [
     RequestsService,
-    AppConfigService,
     UsersService,
     AuthenticationService,
     TrailsService
