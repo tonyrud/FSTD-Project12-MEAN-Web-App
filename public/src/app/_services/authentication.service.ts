@@ -3,8 +3,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { APP_CONFIG } from '../../app.config';
-import { AppConfigService } from './app.config.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable()
@@ -13,14 +12,12 @@ export class AuthenticationService {
 
   constructor(
     private http: Http,
-    private router: Router,
-    private _configService: AppConfigService
+    private router: Router
   ) {
-    this.API_URL = _configService.apiUrl
   }
 
   login(user: object): Observable<any> {
-    return this.http.post(this.API_URL + 'login', user)
+    return this.http.post(environment.apiUrl + 'login', user)
       .map((response: Response) => {
         // login successful if there's an auth token in the response
         let user = response.json().user
