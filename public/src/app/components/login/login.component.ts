@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   loginSubmit(form, event) {
     this._auth.login(this.loginForm.value).subscribe(
-      () => {
+      user => {
         this._user.sendUser()
         this.router.navigate(['search-locations'])
       },

@@ -8,7 +8,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-  private API_URL: string
 
   constructor(
     private http: Http,

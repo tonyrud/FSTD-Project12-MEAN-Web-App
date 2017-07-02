@@ -11,6 +11,7 @@ import { User } from '../../_interfaces/user.interface';
   styleUrls: ['./locations.component.scss']
 })
 export class LocationsComponent implements OnInit {
+  users
   locations: Location
   selectedDistance = '25'
   selectedLimit = '5'
@@ -37,6 +38,10 @@ export class LocationsComponent implements OnInit {
   ngOnInit() {
     this.onSearchChange()
     this.user = this._users.getSignedUser()
+    this._users.getUsers().subscribe(users =>{
+      this.users = users
+      console.log(this.users)
+    })
   }
 
   onSearchChange() {
@@ -44,6 +49,7 @@ export class LocationsComponent implements OnInit {
       console.log(trails.places)
       this.locations = trails.places
     })
+
   }
 
   onInput (value: string) {

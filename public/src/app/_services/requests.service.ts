@@ -13,7 +13,7 @@ export class RequestsService {
   ) {}
 
   public apiGet(endpoint: string): Observable<any> {
-    return this.http.get(environment.apiUrl + endpoint)
+    return this.http.get(environment.apiUrl + endpoint, this.apiHeader())
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
@@ -55,6 +55,15 @@ export class RequestsService {
     const headers = new Headers()
     headers.append('X-Mashape-Key', 'BI4KvoJEXxmshqjI2TbFLM34KLqzp15xyvujsng1tHZBTzfDLv')
     headers.append('Accept', 'text/plain')
+    return new RequestOptions({headers})
+  }
+
+  private apiHeader (): RequestOptions {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    if (!currentUser) return
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/json')
+    headers.append('Authorization', 'Basic ' + btoa(currentUser.email + ":" + currentUser.password))
     return new RequestOptions({headers})
   }
 

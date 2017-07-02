@@ -17,9 +17,8 @@ exports.getUsers = async (req, res, next) => {
 }
 
 exports.login = async (req, res) => {
-  console.log('Authenticated? - ', req.isAuthenticated())
-  console.log('User - ', req.user.email)
-  const user = req.user
+  const user = await User.findOne({ email: req.body.email })
+  console.log(user)
   res.json({ user })
 }
 
@@ -55,14 +54,9 @@ exports.validateRegister = (req, res, next) => {
 }
 
 exports.register = async (req, res, next) => {
-  const user = new User({
-    email: req.body.email,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName
-  })
-  const register = promisify(User.register, User)
-  await register(user, req.body.password)
-  res.json({ user })
+  const user = new User(req.body)
+  await user.save()
+  res.json({ message: 'Success registering user', user })
 }
 
 exports.forgot = async (req, res) => {
@@ -104,7 +98,6 @@ exports.confirmedPasswords = (req, res, next) => {
     console.log('passwords match')
     next()
   }
-  // res.redirect('back')
 }
 
 exports.update = async (req, res, next) => {
@@ -126,14 +119,13 @@ exports.update = async (req, res, next) => {
 }
 
 exports.addLocationToUser = async (req, res, next) => {
-  console.log(req.isAuthenticated())
-  console.log('User: ', req.user)
-  const user = await User.findOne({ _id: req.params.userId })
-  const locations = user.locations.map(obj => obj.toString())
-  const operator = locations.includes(req.params.locationId) ? '$pull' : '$addToSet' // check if in array
-  await User.findByIdAndUpdate({ _id: req.params.userId },
+  // loop users saved locations, map to string for operator checking
+  const locations = req.user.locations.map(obj => obj.toString())
+  // check if location is in user array
+  const operator = locations.includes(req.params.locationId) ? '$pull' : '$addToSet'
+  // update user locations based on operator needed
+  const user = await User.findByIdAndUpdate(req.user._id,
     { [operator]: { locations: req.params.locationId } },
     { new: true })
-  console.log('success')
-  res.json({ message: 'Success saving location to user' })
+  res.json({ message: 'Success saving location to user', user })
 }
