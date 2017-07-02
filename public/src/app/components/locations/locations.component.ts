@@ -57,7 +57,7 @@ export class LocationsComponent implements OnInit {
   }
 
   saveLocation (location: Location) {
-    console.log('location saved:', location)
+    console.log('full location:', location)
     this._locations.saveLocation(location).subscribe(savedLocation => {
       console.log('returned save!', savedLocation)
     },
