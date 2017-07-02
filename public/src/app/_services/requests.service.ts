@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http'
 import 'rxjs/add/operator/map'
 import { Observable } from 'rxjs/Observable'
 import { environment } from '../../environments/environment'
+import { apiErrors } from '../_interfaces/errors.interface';
 
 @Injectable()
 export class RequestsService {
@@ -23,17 +24,26 @@ export class RequestsService {
       .catch(this.handleError)
   }
 
-  // public apiPut(endpoint: string, body: any) {
-  //   return this.http.put(APP_CONFIG.apiServer + endpoint, body, this.userHeader()).map((response: Response) => response.json())
-  // }
+  public apiPut(endpoint: string, body: any): Observable<any> {
+    return this.http.put(environment.apiUrl + endpoint, body)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
 
-  // public apiPatch(endpoint: string, body: any = {}) {
-  //   return this.http.patch(APP_CONFIG.apiServer + endpoint, body, this.userHeader()).map((response: Response) => response.json())
-  // }
+  public apiPatch(endpoint: string, body: any): Observable<any> {
+    return this.http.patch(environment.apiUrl + endpoint, body)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
 
-  // public apiDelete(endpoint: string) {
-  //   return this.http.delete(APP_CONFIG.apiServer + endpoint, this.userHeader()).map((response: Response) => response.json())
-  // }
+  public apiDelete(endpoint: string): Observable<any> {
+    return this.http.delete(environment.apiUrl + endpoint)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
+
+
+  // Trail API Methods
 
   public trailApiGet(endpoint: string): Observable<any> {
     return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader())
@@ -48,18 +58,24 @@ export class RequestsService {
     return new RequestOptions({headers})
   }
 
-  private handleError(error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
-        let errMsg: string;
+  private handleError(error: apiErrors): Observable<apiErrors> {
+        
+        let errMsg: apiErrors
         if (error instanceof Response) {
-            const body = error.json() || '';
+            const body = error.json() || ''
             const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            errMsg = {
+              message: err.message,
+              status: error.status,
+              statusText: error.statusText,
+              stackHighlighted: err.stackHighlighted
+            }
         } else {
-            errMsg = error.message ? error.message : error.toString();
+            errMsg = {
+              message: error.message ? error.message : error.toString()
+            }
         }
-        console.error('ERR in requests.server.ts', errMsg);
-        return Observable.throw(errMsg);
+        return Observable.throw(errMsg)
     }
 
 }

@@ -21,12 +21,9 @@ const locationSchema = new Schema({
     type: String,
     trim: true
   },
-  lat: {
-    type: Number
-  },
-  lon: {
-    type: Number
-  },
+  lat: { type: Number },
+  lon: { type: Number },
+  unique_id: { type: Number },
   author: {
     type: mongoose.Schema.ObjectId,
     ref: 'User'
