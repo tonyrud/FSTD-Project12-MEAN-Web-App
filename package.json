@@ -13,7 +13,8 @@
     "start-server": "nodemon ./start.js --ignore public/",
     "start-client": "ng serve",
     "seed": "node ./app/data/load-sample-data.js",
-    "delete-db-data": "node ./data/load-sample-data.js --delete"
+    "delete-db-data": "node ./data/load-sample-data.js --delete",
+    "debug": "nodemon --debug-brk=5858 start.js"
   },
   "repository": {
     "type": "git",

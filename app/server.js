@@ -65,22 +65,22 @@ app.use(passport.session())
 
 // pass variables to our templates + all requests
 app.use((req, res, next) => {
-  res.locals.h = helpers
-  // res.locals.user = req.user || null
-  res.locals.currentPath = req.path
+  // res.locals.h = helpers
+  res.locals.user = req.user || null
+  // res.locals.currentPath = req.path
   next()
 })
 
 // promisify some callback based APIs
-app.use((req, res, next) => {
-  // req.login = promisify(req.login, req)
-  next()
-})
+// app.use((req, res, next) => {
+//   // req.login = promisify(req.login, req)
+//   next()
+// })
 
-// After allllll that above middleware, we finally handle our own routes!
+// Handle our api routes
 app.use('/api', routes)
 
-// If that above routes didnt work, we 404 them and forward to error handler
+// If the above route didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound)
 
 // Template render error

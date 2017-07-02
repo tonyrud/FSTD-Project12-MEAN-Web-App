@@ -17,34 +17,39 @@ exports.getUsers = async (req, res, next) => {
 }
 
 exports.login = async (req, res) => {
+  console.log('Authenticated? - ', req.isAuthenticated())
+  console.log('User - ', req.user.email)
   const user = req.user
   res.json({ user })
 }
 
 exports.logout = async (req, res) => {
   req.logout()
-  res.json({ msg: 'logged out' })
+  res.json({ msg: `You've logged out` })
 }
 
 exports.validateRegister = (req, res, next) => {
   // user express validator methods
   req.sanitizeBody('firstName')
-  req.checkBody('firstName', 'You must supply a name!').notEmpty()
-  req.checkBody('email', 'That Email is not valid!').isEmail()
+  req.sanitizeBody('lastName')
+  req.checkBody('firstName', 'You must supply a first name').notEmpty()
+  req.checkBody('lastName', 'You must supply a last name').notEmpty()
+  req.checkBody('email', 'Email is not valid').isEmail()
   req.sanitizeBody('email').normalizeEmail({
     remove_dots: false,
     remove_extension: false,
     gmail_remove_subaddress: false
   })
-  req.checkBody('password', 'Password Cannot be Blank!').notEmpty()
-  req.checkBody('confirmPassword', 'Confirmed Password cannot be blank!').notEmpty()
+  req.checkBody('password', 'Password Cannot be Blank').notEmpty()
+  req.checkBody('confirmPassword', 'Confirm Password cannot be blank').notEmpty()
   req.checkBody('confirmPassword', 'Oops! Your passwords do not match').equals(req.body.password)
 
   const errors = req.validationErrors()
   if (errors) {
-    // res.json({ errors })
-    next(errors)
-    // return // stop the fn from running
+    // return all error messages into new Error
+    const msgs = errors.map(error => error.msg)
+    const err = new Error(msgs)
+    next(err)
   }
   next() // there were no errors!
 }
@@ -118,4 +123,17 @@ exports.update = async (req, res, next) => {
   user.resetPasswordExpires = undefined
   const updatedUser = await user.save()
   res.json({user: updatedUser})
+}
+
+exports.addLocationToUser = async (req, res, next) => {
+  console.log(req.isAuthenticated())
+  console.log('User: ', req.user)
+  const user = await User.findOne({ _id: req.params.userId })
+  const locations = user.locations.map(obj => obj.toString())
+  const operator = locations.includes(req.params.locationId) ? '$pull' : '$addToSet' // check if in array
+  await User.findByIdAndUpdate({ _id: req.params.userId },
+    { [operator]: { locations: req.params.locationId } },
+    { new: true })
+  console.log('success')
+  res.json({ message: 'Success saving location to user' })
 }

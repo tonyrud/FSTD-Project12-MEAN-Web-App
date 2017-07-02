@@ -9,7 +9,7 @@ export class LocationsService {
     private _reqService: RequestsService
   ) { }
   
-  saveLocation(location: Location) {
-    return this._reqService.apiPost(`locations`, location)
+  saveLocation(location: Location, userId: string) {
+    return this._reqService.apiPost(`locations/${userId}/${location.unique_id}`, location)
   }
 }

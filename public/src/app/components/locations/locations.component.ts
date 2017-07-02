@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { TrailsService } from '../../_services/trails.service'
 import { Location } from '../../_interfaces/location.interface';
 import { LocationsService } from '../../_services/locations.service';
+import { UsersService } from '../../_services/users.service';
+import { User } from '../../_interfaces/user.interface';
 
 @Component({
   selector: 'locations',
@@ -13,6 +15,7 @@ export class LocationsComponent implements OnInit {
   selectedDistance = '25'
   selectedLimit = '5'
   searchValue = 'Seattle'
+  user: User
   distances = [
     {value: '10', viewValue: '10'},
     {value: '25', viewValue: '25'},
@@ -27,11 +30,13 @@ export class LocationsComponent implements OnInit {
 
   constructor(
     private _trails: TrailsService,
-    private _locations: LocationsService
+    private _locations: LocationsService,
+    private _users: UsersService
   ) { }
 
   ngOnInit() {
     this.onSearchChange()
+    this.user = this._users.getSignedUser()
   }
 
   onSearchChange() {
@@ -57,8 +62,7 @@ export class LocationsComponent implements OnInit {
   }
 
   saveLocation (location: Location) {
-    console.log('full location:', location)
-    this._locations.saveLocation(location).subscribe(savedLocation => {
+    this._locations.saveLocation(location, this.user._id).subscribe(savedLocation => {
       console.log('returned save!', savedLocation)
     },
     error => {
