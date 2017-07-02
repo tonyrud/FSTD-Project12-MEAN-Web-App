@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
+const Location = mongoose.model('Location')
 const promisify = require('es6-promisify')
 const mail = require('../handlers/mail')
 const crypto = require('crypto')
@@ -131,13 +132,15 @@ exports.update = async (req, res, next) => {
 }
 
 exports.addLocationToUser = async (req, res, next) => {
+  // get location from database
+  const location = await Location.findOne({unique_id: req.params.uniqueId})
   // loop users saved locations, map to string for operator checking
   const locations = req.user.locations.map(obj => obj.toString())
-  // check if location is in user array
-  const operator = locations.includes(req.params.locationId) ? '$pull' : '$addToSet'
+  const operator = locations.includes(location._id) ? '$pull' : '$addToSet'
+
   // update user locations based on operator needed
   const user = await User.findByIdAndUpdate(req.user._id,
-    { [operator]: { locations: req.params.locationId } },
+    { [operator]: { locations: location._id } },
     { new: true })
-  res.json({ message: 'Success saving location to user', user })
+  res.json({ message: 'Success saving location to user', locations: user.locations })
 }

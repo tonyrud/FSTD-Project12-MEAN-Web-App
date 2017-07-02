@@ -10,6 +10,6 @@ export class LocationsService {
   ) { }
   
   saveLocation(location: Location) {
-    return this._reqService.apiPost(`locations/`, location)
+    return this._reqService.apiPost(`locations/${location.unique_id}`, location)
   }
 }

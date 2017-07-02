@@ -34,9 +34,10 @@ router.post('/resetPassword/:token',
 router.get('/logout', userController.logout)
 
 // Locations routes
-router.post('/locations/',
+router.post('/locations/:uniqueId',
   authController.isAuthenticated,
   catchAsyncErrors(locationController.saveLocation),
+  authController.isAuthenticated,
   catchAsyncErrors(userController.addLocationToUser)
 )
 
