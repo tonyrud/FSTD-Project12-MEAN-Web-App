@@ -5,23 +5,19 @@ const User = mongoose.model('User')
 
 passport.use(new BasicStrategy(
   { usernameField: 'email' },
-  function (username, password, callback) {
+  function (username, password, done) {
     User.findOne({ email: username }, function (err, user) {
-      if (err) { return callback(err) }
+      if (err) { return done(err) }
       // No user found with that username
-      if (!user) { return callback(null, false) }
-      password = '123'
-      // Make sure the password is correct
-      user.verifyPassword(password, function (err, isMatch) {
-        console.log(isMatch)
-        if (err) { return callback(err) }
+      if (!user) { return done(null, false) }
 
-        // Password did not match
-        if (!isMatch) { return callback(null, false) }
-
+      // check user password to password from client
+      if (user.password === password) {
         // Success
-        return callback(null, user)
-      })
+        return done(null, user)
+      } else {
+        return done(null, false)
+      }
     })
   }
 ))

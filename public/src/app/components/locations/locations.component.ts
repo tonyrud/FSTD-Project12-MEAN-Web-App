@@ -38,10 +38,10 @@ export class LocationsComponent implements OnInit {
   ngOnInit() {
     this.onSearchChange()
     this.user = this._users.getSignedUser()
-    this._users.getUsers().subscribe(users =>{
-      this.users = users
-      console.log(this.users)
-    })
+    // this._users.getUsers().subscribe(users =>{
+    //   this.users = users
+    //   console.log(this.users)
+    // })
   }
 
   onSearchChange() {
@@ -68,7 +68,7 @@ export class LocationsComponent implements OnInit {
   }
 
   saveLocation (location: Location) {
-    this._locations.saveLocation(location, this.user._id).subscribe(savedLocation => {
+    this._locations.saveLocation(location).subscribe(savedLocation => {
       console.log('returned save!', savedLocation)
     },
     error => {

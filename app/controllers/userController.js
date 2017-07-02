@@ -16,10 +16,22 @@ exports.getUsers = async (req, res, next) => {
   res.json({ users })
 }
 
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email })
-  console.log(user)
-  res.json({ user })
+  if (user) {
+    user.verifyPassword(req.body.password, (err, isMatch) => {
+      if (isMatch) {
+        res.json({ user })
+      } else {
+        // error checking password
+        const err = new Error('Incorrect password')
+        next(err)
+      }
+    })
+  } else {
+    const err = new Error('Incorrect email')
+    next(err)
+  }
 }
 
 exports.logout = async (req, res) => {

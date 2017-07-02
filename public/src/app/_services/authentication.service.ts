@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import { environment } from '../../environments/environment';
+import { RequestsService } from './requests.service';
 
 
 @Injectable()
@@ -11,15 +12,16 @@ export class AuthenticationService {
 
   constructor(
     private http: Http,
-    private router: Router
+    private router: Router,
+    private _request: RequestsService
   ) {
   }
 
   login(user: object): Observable<any> {
-    return this.http.post(environment.apiUrl + 'login', user)
-      .map((response: Response) => {
+    return this._request.apiPost('login', user)
+      .map((response: any) => {
         // login successful if there's an auth token in the response
-        let user = response.json().user
+        let user = response.user
         if (user) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));

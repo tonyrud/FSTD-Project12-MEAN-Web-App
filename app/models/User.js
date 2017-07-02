@@ -46,12 +46,12 @@ userSchema.pre('save', function (next) {
   })
 })
 
-userSchema.methods.verifyPassword = function (password, cb) {
-  console.log(this.password)
+userSchema.methods.verifyPassword = function (password, next) {
+  // compare user password to client sent password
   bcrypt.compare(password, this.password, function (err, isMatch) {
-    console.log(isMatch)
-    if (err) return cb(err)
-    cb(null, isMatch)
+    // isMatch equals true or false based on compare
+    if (err) return next(err)
+    next(null, isMatch)
   })
 }
 

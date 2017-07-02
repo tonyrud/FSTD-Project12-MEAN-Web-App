@@ -19,25 +19,25 @@ export class RequestsService {
   }
 
   public apiPost(endpoint: string, body: any): Observable<any> {
-    return this.http.post(environment.apiUrl + endpoint, body)
+    return this.http.post(environment.apiUrl + endpoint, body, this.apiHeader())
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
 
   public apiPut(endpoint: string, body: any): Observable<any> {
-    return this.http.put(environment.apiUrl + endpoint, body)
+    return this.http.put(environment.apiUrl + endpoint, body, this.apiHeader())
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
 
   public apiPatch(endpoint: string, body: any): Observable<any> {
-    return this.http.patch(environment.apiUrl + endpoint, body)
+    return this.http.patch(environment.apiUrl + endpoint, body, this.apiHeader())
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
 
   public apiDelete(endpoint: string): Observable<any> {
-    return this.http.delete(environment.apiUrl + endpoint)
+    return this.http.delete(environment.apiUrl + endpoint, this.apiHeader())
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
@@ -69,17 +69,17 @@ export class RequestsService {
   }
 
   private handleError(error: apiErrors): Observable<apiErrors> {
-        
+        // error message returned as observable
         let errMsg: apiErrors
         if (error instanceof Response) {
-            if (typeof error._body === 'string') {
-              const body = error._body
-              errMsg = {
-                message: body,
-                status: error.status,
-                statusText: error.statusText,
-              }
-            } else {
+            // if (typeof error._body === 'string') {
+            //   const body = error._body
+            //   errMsg = {
+            //     message: body,
+            //     status: error.status,
+            //     statusText: error.statusText,
+            //   }
+            // } else {
               const body = error.json() || ''
               const err = body.error || JSON.stringify(body);
               errMsg = {
@@ -87,7 +87,7 @@ export class RequestsService {
                 status: error.status,
                 statusText: error.statusText,
                 stackHighlighted: err.stackHighlighted
-              }
+              // }
             }
         } else {
             errMsg = {

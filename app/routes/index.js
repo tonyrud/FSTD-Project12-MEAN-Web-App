@@ -23,10 +23,9 @@ router.post('/register',
 // register the user
   userController.register
 )
-router.post('/login',
-  // passport.authenticate('local'),
-  userController.login
-)
+
+// login routes and methods, these will not user authController methods
+router.post('/login', userController.login)
 router.post('/forgot', catchAsyncErrors(userController.forgot))
 router.post('/resetPassword/:token',
   userController.confirmedPasswords,
@@ -35,10 +34,10 @@ router.post('/resetPassword/:token',
 router.get('/logout', userController.logout)
 
 // Locations routes
-router.post('/locations/:locationId',
+router.post('/locations/',
   authController.isAuthenticated,
+  catchAsyncErrors(locationController.saveLocation),
   catchAsyncErrors(userController.addLocationToUser)
-  // catchAsyncErrors(locationController.saveLocation)
 )
 
 module.exports = router
