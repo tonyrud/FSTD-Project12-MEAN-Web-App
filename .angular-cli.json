@@ -2,7 +2,7 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
     "name": "mean-hiking-app",
-    "ejected": true
+    "ejected": false
   },
   "apps": [
     {
@@ -42,18 +42,18 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "./public/src/tsconfig.app.json"
     },
     {
-      "project": "src/tsconfig.spec.json"
+      "project": "./public/src/tsconfig.spec.json"
     },
     {
-      "project": "e2e/tsconfig.e2e.json"
+      "project": "./public/e2e/tsconfig.e2e.json"
     }
   ],
   "test": {
     "karma": {
-      "config": "./karma.conf.js"
+      "config": "./public/karma.conf.js"
     }
   },
   "defaults": {
