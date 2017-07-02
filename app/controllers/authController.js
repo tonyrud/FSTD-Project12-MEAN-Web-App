@@ -8,12 +8,12 @@ passport.use(new BasicStrategy(
   function (username, password, callback) {
     User.findOne({ email: username }, function (err, user) {
       if (err) { return callback(err) }
-
       // No user found with that username
       if (!user) { return callback(null, false) }
-
+      password = '123'
       // Make sure the password is correct
       user.verifyPassword(password, function (err, isMatch) {
+        console.log(isMatch)
         if (err) { return callback(err) }
 
         // Password did not match

@@ -61,9 +61,10 @@ export class RequestsService {
   private apiHeader (): RequestOptions {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     if (!currentUser) return
+    const encodedUser = btoa(currentUser.email + ":" + currentUser.password)
     const headers = new Headers()
     headers.append('Content-Type', 'application/json')
-    headers.append('Authorization', 'Basic ' + btoa(currentUser.email + ":" + currentUser.password))
+    headers.append('Authorization', 'Basic ' + encodedUser)
     return new RequestOptions({headers})
   }
 
@@ -71,13 +72,22 @@ export class RequestsService {
         
         let errMsg: apiErrors
         if (error instanceof Response) {
-            const body = error.json() || ''
-            const err = body.error || JSON.stringify(body);
-            errMsg = {
-              message: err.message,
-              status: error.status,
-              statusText: error.statusText,
-              stackHighlighted: err.stackHighlighted
+            if (typeof error._body === 'string') {
+              const body = error._body
+              errMsg = {
+                message: body,
+                status: error.status,
+                statusText: error.statusText,
+              }
+            } else {
+              const body = error.json() || ''
+              const err = body.error || JSON.stringify(body);
+              errMsg = {
+                message: err.message,
+                status: error.status,
+                statusText: error.statusText,
+                stackHighlighted: err.stackHighlighted
+              }
             }
         } else {
             errMsg = {

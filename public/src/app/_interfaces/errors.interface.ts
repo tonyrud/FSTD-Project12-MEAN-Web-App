@@ -3,4 +3,5 @@ export interface apiErrors {
   status?: number
   stackHighlighted?: string,
   statusText?: string
+  _body?: any
 }
