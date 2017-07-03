@@ -51,6 +51,12 @@ export class RequestsService {
       .catch(this.handleError)
   }
 
+  public googleSearchApiGet(endpoint: string): Observable<any> {
+    return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader())
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
+
   private trailHeader (): RequestOptions {
     const headers = new Headers()
     headers.append('X-Mashape-Key', 'BI4KvoJEXxmshqjI2TbFLM34KLqzp15xyvujsng1tHZBTzfDLv')
@@ -58,6 +64,7 @@ export class RequestsService {
     return new RequestOptions({headers})
   }
 
+  // Basic auth header
   private apiHeader (): RequestOptions {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     if (!currentUser) return
@@ -68,6 +75,7 @@ export class RequestsService {
     return new RequestOptions({headers})
   }
 
+  // request error handler
   private handleError(error: apiErrors): Observable<apiErrors> {
         // error message returned as observable
         let errMsg: apiErrors

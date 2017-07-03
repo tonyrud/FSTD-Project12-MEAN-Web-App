@@ -37,7 +37,7 @@ exports.login = async (req, res, next) => {
 
 exports.logout = async (req, res) => {
   req.logout()
-  res.json({ msg: `You've logged out` })
+  res.json({ message: `You've logged out` })
 }
 
 exports.validateRegister = (req, res, next) => {
@@ -72,11 +72,12 @@ exports.register = async (req, res, next) => {
   res.json({ message: 'Success registering user', user })
 }
 
-exports.forgot = async (req, res) => {
+exports.forgot = async (req, res, next) => {
   // see if a user with email
   const user = await User.findOne({ email: req.body.email })
   if (!user) {
-    return res.json({msg: 'no user with that account'})
+    const error = new Error('No user with that account')
+    next(error)
   }
   // set reset token
   user.resetPasswordToken = crypto.randomBytes(20).toString('hex')
@@ -91,10 +92,11 @@ exports.forgot = async (req, res) => {
   //   filename: 'password-reset'
   // })
 
-  res.json({msg: 'You have been emailed a password reset link.', url: resetURL})
+  res.json({ message: 'You have been emailed a password reset link.', url: resetURL, token: user.resetPasswordToken })
 }
 
 exports.reset = async (req, res) => {
+  // get user that has reset token in link, and expires is greater than now
   const user = await User.findOne({
     resetPasswordToken: req.body.token,
     resetPasswordExpires: { $gt: Date.now() } // check if database value is greater than now
@@ -102,8 +104,7 @@ exports.reset = async (req, res) => {
   if (!user) {
     return res.json({msg: 'Password reset is invalid or has expired'})
   }
-  // if user, show reset password form
-  res.json('reset', { msg: 'Reset your password' })
+  res.json({ msg: 'Reset your password' })
 }
 
 exports.confirmedPasswords = (req, res, next) => {
@@ -134,13 +135,14 @@ exports.update = async (req, res, next) => {
 exports.addLocationToUser = async (req, res, next) => {
   // get location from database
   const location = await Location.findOne({unique_id: req.params.uniqueId})
+  const locationId = location._id.toString()
   // loop users saved locations, map to string for operator checking
   const locations = req.user.locations.map(obj => obj.toString())
-  const operator = locations.includes(location._id) ? '$pull' : '$addToSet'
+  const operator = locations.includes(locationId) ? '$pull' : '$addToSet'
 
   // update user locations based on operator needed
   const user = await User.findByIdAndUpdate(req.user._id,
     { [operator]: { locations: location._id } },
     { new: true })
-  res.json({ message: 'Success saving location to user', locations: user.locations })
+  res.json({ message: 'Success adding/remove a location to user', locations: user.locations })
 }

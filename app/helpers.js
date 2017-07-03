@@ -5,7 +5,7 @@
 // read files from the system we're running on
 const fs = require('fs')
 
-// moment.js for displaying dates in templates
+// moment.js for dates
 exports.moment = require('moment')
 
 // Helper for static google map

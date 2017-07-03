@@ -12,4 +12,8 @@ export class LocationsService {
   saveLocation(location: Location) {
     return this._reqService.apiPost(`locations/${location.unique_id}`, location)
   }
+
+  getLocationImage(location: Location) {
+    return this._reqService.apiPost(`locations/${location.unique_id}`, location)
+  }
 }

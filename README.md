@@ -10,6 +10,14 @@ Start dev api and client servers
 ```
 npm start
 ```
+Start API server only
+```
+npm run start-server
+```
+Start develop client server only
+```
+npm run start-client
+```
 
 Both servers will automatically reload if you change any of the source files.
 
