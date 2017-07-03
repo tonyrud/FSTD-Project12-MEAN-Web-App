@@ -8,7 +8,7 @@ export class TrailsService {
     private _req: RequestsService
   ) { }
 
-  testTrailApi(searchParams: string) {
+  searchTrails(searchParams: string) {
     return this._req.trailApiGet(searchParams)
   }
 }

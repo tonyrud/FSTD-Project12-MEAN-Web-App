@@ -4,10 +4,12 @@
     <md-card-title>{{ location.name }}</md-card-title>
     <md-card-subtitle>{{ location.city }}, {{ location.state }}</md-card-subtitle>
   </md-card-header>
-  <img md-card-image src="https://placeholdit.co//i/555x350">
-
+  <figure class="card-image-container">
+    <img md-card-image src="{{ location?.imageLink }}">
+  </figure>
+  <!--{{ location?.images[0] | json }}-->
   <md-card-content>
-    <p>
+    <p *ngIf="location.description">
       {{ location.description.split(' ').slice(0, 25).join(' ') + '...' }}
     </p>
   </md-card-content>

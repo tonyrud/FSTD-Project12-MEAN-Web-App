@@ -13,7 +13,8 @@ export class LocationsService {
     return this._reqService.apiPost(`locations/${location.unique_id}`, location)
   }
 
-  getLocationImage(location: Location) {
-    return this._reqService.apiPost(`locations/${location.unique_id}`, location)
+  getLocationImage(locationName: string) {
+    return this._reqService.apiGet(`/locations/image/` + locationName)
+    // return this._reqService.flickrSearchApiGet(locationName)
   }
 }

@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const Location = mongoose.model('Location')
+const request = require('request')
+const http = require('https')
+const axios = require('axios')
 
 exports.saveLocation = async (req, res, next) => {
   // find count of existing location based on unique id
@@ -13,4 +16,17 @@ exports.saveLocation = async (req, res, next) => {
     console.log('don\'t save location')
   }
   next()
+}
+
+exports.getImage = async (req, res, next) => {
+  const images = await axios.get('https://api.flickr.com/services/feeds/photos_public.gne', {
+    params: {
+      tags: req.params.search,
+      format: 'json',
+      nojsoncallback: 1
+    }
+  })
+  if (images) {
+    res.json({ images: images.data.items })
+  }
 }

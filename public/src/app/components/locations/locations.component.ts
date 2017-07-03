@@ -30,23 +30,18 @@ export class LocationsComponent implements OnInit {
   ]
 
   constructor(
-    private _trails: TrailsService,
-    private _locations: LocationsService,
-    private _users: UsersService
+    private _trailsService: TrailsService,
+    private _locationsService: LocationsService,
+    private _usersService: UsersService
   ) { }
 
   ngOnInit() {
     this.onSearchChange()
-    this.user = this._users.getSignedUser()
-    // this._users.getUsers().subscribe(users =>{
-    //   this.users = users
-    //   console.log(this.users)
-    // })
+    this.user = this._usersService.getSignedUser()
   }
 
   onSearchChange() {
-    this._trails.testTrailApi(`?limit=${this.selectedLimit}&q[activities_activity_type_name_eq]=hiking&q[city_cont]=${this.searchValue}&radius=${this.selectedDistance}`).subscribe(trails => {
-      console.log(trails.places)
+    this._trailsService.searchTrails(`?limit=${this.selectedLimit}&q[activities_activity_type_name_eq]=hiking&q[city_cont]=${this.searchValue}&radius=${this.selectedDistance}`).subscribe(trails => {
       this.locations = trails.places
     })
 
@@ -68,7 +63,7 @@ export class LocationsComponent implements OnInit {
   }
 
   saveLocation (location: Location) {
-    this._locations.saveLocation(location).subscribe(savedLocation => {
+    this._locationsService.saveLocation(location).subscribe(savedLocation => {
       console.log('returned save!', savedLocation)
     },
     error => {

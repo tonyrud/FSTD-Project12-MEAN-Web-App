@@ -43,4 +43,6 @@ router.post('/locations/:uniqueId',
   catchAsyncErrors(userController.addLocationToUser)
 )
 
+router.get('/locations/image/:search', locationController.getImage)
+
 module.exports = router

@@ -1,0 +1,9 @@
+{
+  "/rest": {
+    "target": "https://api.flickr.com",
+    "pathRewrite": {
+      "^/rest": ""
+    },
+    "secure": false
+  }
+}

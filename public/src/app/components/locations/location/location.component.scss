@@ -31,3 +31,11 @@
     max-height: 98px;
     overflow: hidden;
 }
+
+.card-image-container {
+    overflow: hidden;
+    max-height: 250px;
+    margin-bottom: 1em;
+    width: calc(100% + 48px);
+    margin: 0 -24px 16px -24px;
+}

@@ -17,7 +17,7 @@
   </div>
   <!--<md-slider min="1" max="50" step="1" value="1"></md-slider>-->
   <div class="locations">
-    <location *ngFor="let item of locations; index as i;" class="location" [location]="item" (saveLocation)="saveLocation($event)"></location>
+    <location *ngFor="let location of locations; index as i;" class="location" [location]="location" (saveLocation)="saveLocation($event)"></location>
   </div>
 </div>
 <form>

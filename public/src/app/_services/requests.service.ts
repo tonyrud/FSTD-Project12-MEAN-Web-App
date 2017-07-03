@@ -43,19 +43,20 @@ export class RequestsService {
   }
 
 
-  // Trail API Methods
+  // Flickr api request
+  public flickrSearchApiGet(searchItem: string): Observable<any> {
+    return this.http.get(`https://api.flickr.com/services/feeds/photos_public.gne?tags=${searchItem}&format=json&nojsoncallback=1`)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
 
+  // Trail API Methods
   public trailApiGet(endpoint: string): Observable<any> {
     return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader())
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
 
-  public googleSearchApiGet(endpoint: string): Observable<any> {
-    return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader())
-      .map((response: Response) => response.json())
-      .catch(this.handleError)
-  }
 
   private trailHeader (): RequestOptions {
     const headers = new Headers()
