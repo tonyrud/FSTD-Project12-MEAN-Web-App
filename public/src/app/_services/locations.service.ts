@@ -14,7 +14,7 @@ export class LocationsService {
   }
 
   getLocationImage(locationName: string) {
-    return this._reqService.apiGet(`/locations/image/` + locationName)
+    return this._reqService.apiGet(`locations/image/` + locationName)
     // return this._reqService.flickrSearchApiGet(locationName)
   }
 }

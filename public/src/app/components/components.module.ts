@@ -7,18 +7,22 @@ import { LocationComponent } from './locations/location/location.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { RouterModule } from '@angular/router';
+import { ViewLocationComponent } from './view-location/view-location.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MyMaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     FormCardComponent,
     LocationsComponent,
     LocationComponent,
+    ViewLocationComponent,
   ],
   exports: [
     FormCardComponent,

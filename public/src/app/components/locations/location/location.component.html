@@ -1,6 +1,5 @@
 <md-card>
   <md-card-header>
-    <div md-card-avatar class="example-header-image"></div>
     <md-card-title>{{ location.name }}</md-card-title>
     <md-card-subtitle>{{ location.city }}, {{ location.state }}</md-card-subtitle>
   </md-card-header>
@@ -9,12 +8,12 @@
   </figure>
   <!--{{ location?.images[0] | json }}-->
   <md-card-content>
-    <p *ngIf="location.description">
+    <p *ngIf="location.description; else noDesc">
       {{ location.description.split(' ').slice(0, 25).join(' ') + '...' }}
     </p>
+    <ng-template #noDesc>No description</ng-template>
   </md-card-content>
   <md-card-actions>
     <button md-button (click)="submitSaveLocation(location)">LIKE</button>
-    <button md-button>SHARE</button>
   </md-card-actions>
 </md-card>

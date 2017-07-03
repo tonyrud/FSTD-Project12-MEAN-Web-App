@@ -1,41 +1,25 @@
 @import "~styles/_partials/_variables";
 
-// .location {
-//     background: white;
-//     margin: 10px 0;
-//     width: 24%;
-//     box-shadow: $shadow !important;
-
-//     &--wide {
-//         width: 100%;
-//     }
-
-//     &__details {
-//         padding: 2rem;
-
-//         p {
-//             line-height: 1.2;
-//             margin-bottom: 0;
-//         }
-//     }
-
-//     @media all and (max-width: 850px) {
-//         width: 48%;
-//     }
-
-//     @media all and (max-width: 550px) {
-//         width: 100%;
-//     }
-// }
 .mat-card-content {
-    max-height: 98px;
+    height: 45px;
     overflow: hidden;
 }
 
 .card-image-container {
     overflow: hidden;
-    max-height: 250px;
+    height: 250px;
     margin-bottom: 1em;
     width: calc(100% + 48px);
     margin: 0 -24px 16px -24px;
+
+    img {
+        margin: auto;
+        width: 100%;
+    }
+}
+
+.mat-card-title {
+    font-weight: bold;
+    color: #888;
+    font-size: 1.7em;
 }
