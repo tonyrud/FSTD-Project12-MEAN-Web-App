@@ -12,7 +12,7 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'locations', component: LocationsComponent, canActivate: [AuthGuard] },
+  { path: 'search-locations', component: LocationsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotpasswordComponent },
   { path: 'account/reset/:token', component: ResetpasswordComponent },

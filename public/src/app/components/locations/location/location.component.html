@@ -8,11 +8,11 @@
 
   <md-card-content>
     <p>
-      {{ location.description }}
+      {{ location.description.split(' ').slice(0, 25).join(' ') + '...' }}
     </p>
   </md-card-content>
   <md-card-actions>
-    <button md-button>LIKE</button>
+    <button md-button (click)="submitSaveLocation(location)">LIKE</button>
     <button md-button>SHARE</button>
   </md-card-actions>
 </md-card>

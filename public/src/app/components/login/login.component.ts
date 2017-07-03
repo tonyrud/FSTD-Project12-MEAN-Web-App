@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // reset login status
-    this._auth.logout();
+    this._auth.logout()
     // send empty user to reset header observable
-    this._user.sendUser();
+    this._user.sendUser()
     this.loginForm = this._formBuilder.group({
       email: [null, [Validators.required]],
       password: [null, [Validators.required]]
@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
 
   loginSubmit(form, event) {
     this._auth.login(this.loginForm.value).subscribe(
-      () => {
+      user => {
         this._user.sendUser()
-        this.router.navigate(['locations'])
+        this.router.navigate(['search-locations'])
       },
       error => {
         console.error('err login in:', error)

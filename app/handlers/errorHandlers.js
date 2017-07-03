@@ -25,7 +25,7 @@ exports.notFound = (req, res, next) => {
   In development, show error messages related to pug views
 */
 exports.developmentErrors = (err, req, res, next) => {
-  console.log('----error passed to dev errors')
+  console.log('----error passed to dev errors. Message: ', err.message)
   err.stack = err.stack || ''
   const errorDetails = {
     message: err.message,

@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, './../dist')))
 // Allows CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, DELETE')
     return res.status(200).json({})
@@ -49,41 +49,43 @@ app.use(expressValidator())
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser())
 
+/*********************
+ -- passport.js setup --
+*********************/
+
 // Sessions store data on visitors from request to request
 // This keeps users logged in
-app.use(session({
-  secret: process.env.SECRET,
-  key: process.env.KEY,
-  resave: false,
-  saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-}))
+// app.use(session({
+//   secret: process.env.SECRET,
+//   key: process.env.KEY,
+//   resave: false,
+//   saveUninitialized: false,
+//   store: new MongoStore({ mongooseConnection: mongoose.connection })
+// }))
 
 // Passport JS handles logins
 app.use(passport.initialize())
 app.use(passport.session())
 
-// pass variables to our templates + all requests
-app.use((req, res, next) => {
-  res.locals.h = helpers
-  // res.locals.user = req.user || null
-  res.locals.currentPath = req.path
-  next()
-})
+// app.use((req, res, next) => {
+//   req.login = promisify(req.login, req);
+//   next();
+// });
 
-// promisify some callback based APIs
-app.use((req, res, next) => {
-  // req.login = promisify(req.login, req)
-  next()
-})
+/*********************
+ -- routing setup --
+*********************/
 
-// After allllll that above middleware, we finally handle our own routes!
+// Handle our api routes
 app.use('/api', routes)
 
-// If that above routes didnt work, we 404 them and forward to error handler
+/*********************
+ -- error handling setup --
+*********************/
+
+// If the above route didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound)
 
-// Template render error
 if (app.get('env') === 'development') {
   /* Development Error Handler - Prints stack trace */
   app.use(errorHandlers.developmentErrors)
@@ -92,5 +94,5 @@ if (app.get('env') === 'development') {
 // production error handler
 app.use(errorHandlers.productionErrors)
 
-// done! we export it so we can start the site in start.js
+// export app to then start the site in start.js
 module.exports = app

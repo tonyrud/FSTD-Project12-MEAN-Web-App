@@ -10,8 +10,12 @@ export class UsersService {
   private subject = new Subject<any>();
 
   constructor(
-    private _reqService: RequestsService,
+    private _reqService: RequestsService
   ) { }
+
+  getUsers() {
+    return this._reqService.apiGet(`users`)
+  }
 
   registerUser(user: User) {
     return this._reqService.apiPost(`register`, user)

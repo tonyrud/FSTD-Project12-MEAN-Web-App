@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '../../../_interfaces/location.interface';
 
 @Component({
@@ -9,9 +9,14 @@ import { Location } from '../../../_interfaces/location.interface';
 export class LocationComponent implements OnInit {
   @Input() location: Location
 
+  @Output() saveLocation = new EventEmitter()
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  submitSaveLocation (location: Location) {
+    this.saveLocation.emit(location)
+  }
 }
