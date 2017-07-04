@@ -17,6 +17,10 @@ export class LocationsService {
     return this._reqService.apiGet(`locations/account`)
   }
 
+  deleteUserLocation(locationId: Location) {
+    return this._reqService.apiGet(`locations/${locationId.unique_id}`)
+  }
+
   getLocationImage(locationName: string) {
     // using node server for api call due to local dev CORS
     return this._reqService.apiGet(`locations/image/` + locationName)

@@ -45,10 +45,16 @@ router.post('/locations/:uniqueId',
 
 // api for flickr images
 router.get('/locations/image/:search', locationController.getImage)
+
 // get users saved locations
 router.get('/locations/account',
   authController.isAuthenticated,
   locationController.getUserLocations
+)
+
+router.delete('/locations/:uniqueId',
+  authController.isAuthenticated,
+  locationController.deleteLocation
 )
 
 module.exports = router

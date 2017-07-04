@@ -9,19 +9,45 @@
 }
 
 .list-item {
+    position: relative;
     cursor: pointer;
-    // margin-bottom: 1.5em;
+    overflow: hidden;
     border-bottom: 1px rgba(0, 0, 0, 0.15) solid;
     padding: 1em;
-    transition: .2s ease-in-out;
+    transition: .5s ease-in-out;
     transform: scale(1);
+
     h4 {
         color: #333;
         margin-bottom: .3em;
     }
 
     &:hover {
-      transform: scale(1.01);
-      box-shadow: 0 0 10px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.05);
+        transition: .2s ease-in-out;
+        transform: scale(1.01);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    &:hover .location-button {
+      transition: .2s ease-in-out;
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
+
+.location-button {
+    background: #e16b6b;
+    color: white;
+    font-weight: bold;
+    transition: .4s ease-in-out;
+    transform: translateX(150px);
+    opacity: 0;
+    position: absolute;
+    right: 27px;
+    top: 50%;
+    margin-top: -17px;
+
+    &:hover {
+      background: #cd4040;
     }
 }

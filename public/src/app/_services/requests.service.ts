@@ -10,7 +10,7 @@ export class RequestsService {
 
   constructor(
     private http: Http
-  ) {}
+  ) { }
 
   public apiGet(endpoint: string): Observable<any> {
     return this.http.get(environment.apiUrl + endpoint, this.apiHeader())
@@ -50,52 +50,44 @@ export class RequestsService {
   }
 
 
-  private trailHeader (): RequestOptions {
+  private trailHeader(): RequestOptions {
     const headers = new Headers()
     headers.append('X-Mashape-Key', 'BI4KvoJEXxmshqjI2TbFLM34KLqzp15xyvujsng1tHZBTzfDLv')
     headers.append('Accept', 'text/plain')
-    return new RequestOptions({headers})
+    return new RequestOptions({ headers })
   }
 
   // Basic auth header
-  private apiHeader (): RequestOptions {
+  private apiHeader(): RequestOptions {
     let currentUser = JSON.parse(localStorage.getItem('currentUser'))
     if (!currentUser) return
     const encodedUser = btoa(currentUser.email + ":" + currentUser.password)
     const headers = new Headers()
     headers.append('Content-Type', 'application/json')
     headers.append('Authorization', 'Basic ' + encodedUser)
-    return new RequestOptions({headers})
+    return new RequestOptions({ headers })
   }
 
   // request error handler
   private handleError(error: apiErrors): Observable<apiErrors> {
-        // error message returned as observable
-        let errMsg: apiErrors
-        if (error instanceof Response) {
-            // if (typeof error._body === 'string') {
-            //   const body = error._body
-            //   errMsg = {
-            //     message: body,
-            //     status: error.status,
-            //     statusText: error.statusText,
-            //   }
-            // } else {
-              const body = error.json() || ''
-              const err = body.error || JSON.stringify(body);
-              errMsg = {
-                message: err.message,
-                status: error.status,
-                statusText: error.statusText,
-                stackHighlighted: err.stackHighlighted
-              // }
-            }
-        } else {
-            errMsg = {
-              message: error.message ? error.message : error.toString()
-            }
-        }
-        return Observable.throw(errMsg)
+    // error message returned as observable
+    let errMsg: apiErrors
+    if (error instanceof Response) {
+      const body = error.json() || ''
+      const err = body.error || JSON.stringify(body);
+      errMsg = {
+        message: err.message,
+        status: error.status,
+        statusText: error.statusText,
+        stackHighlighted: err.stackHighlighted
+        // }
+      }
+    } else {
+      errMsg = {
+        message: error.message ? error.message : error.toString()
+      }
     }
+    return Observable.throw(errMsg)
+  }
 
 }

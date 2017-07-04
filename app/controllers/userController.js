@@ -135,14 +135,23 @@ exports.update = async (req, res, next) => {
 exports.addLocationToUser = async (req, res, next) => {
   // get location from database
   const location = await Location.findOne({unique_id: req.params.uniqueId})
-  const locationId = location._id.toString()
-  // loop users saved locations, map to string for operator checking
-  const locations = req.user.locations.map(obj => obj.toString())
-  const operator = locations.includes(locationId) ? '$pull' : '$addToSet'
+  // const locationId = location._id.toString()
+  // // loop users saved locations, map to string for operator checking
+  // const locations = req.user.locations.map(obj => obj.toString())
+  const operator = await this.pullOrAddToSet(req)
 
   // update user locations based on operator needed
   const user = await User.findByIdAndUpdate(req.user._id,
     { [operator]: { locations: location._id } },
     { new: true })
   res.json({ message: 'Success adding/remove a location to user', locations: user.locations })
+}
+
+exports.pullOrAddToSet = async (req, res, next) => {
+  // get location from database
+  const location = await Location.findOne({unique_id: req.params.uniqueId})
+  const locationId = location._id.toString()
+  // loop users saved locations, map to string for operator checking
+  const locations = req.user.locations.map(obj => obj.toString())
+  return locations.includes(locationId) ? '$pull' : '$addToSet'
 }

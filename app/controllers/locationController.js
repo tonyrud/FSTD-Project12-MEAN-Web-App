@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const Location = mongoose.model('Location')
-const request = require('request')
-const http = require('https')
+const User = mongoose.model('User')
 const axios = require('axios')
+const userController = require('./userController')
 
 exports.saveLocation = async (req, res, next) => {
   // find count of existing location based on unique id
@@ -36,4 +36,18 @@ exports.getUserLocations = async (req, res, next) => {
     _id: { $in: req.user.locations }
   })
   res.json({ locations: userLocations })
+}
+
+exports.deleteLocation = async (req, res, next) => {
+  const location = await Location.findOne({ unique_id: req.params.uniqueId })
+
+  const operator = await userController.pullOrAddToSet(req)
+
+  await User.findByIdAndUpdate(req.user._id,
+    { [operator]: { locations: location._id } },
+    { new: true })
+
+  await location.remove()
+
+  res.json({ message: 'location removed' })
 }
