@@ -1,7 +1,7 @@
 <div class="inner">
   <h3 class="section-header">Saved Locations</h3>
   <p class="section-sub">Locations you've saved. Click any to get more details, or delete from your list.</p>
-  <div *ngIf="userLocations?.length" class="container">
+  <div *ngIf="userLocations?.length; else noSavedLocations" class="container">
     <ul class="container__list-items">
       <li class="list-item" *ngFor="let location of userLocations" (click)="locationClicked(location)">
         <h4>
@@ -12,5 +12,8 @@
       </li>
     </ul>
   </div>
+  <ng-template #noSavedLocations>
+    <p class="no-locations">You have no saved locations</p>
+  </ng-template>
 
 </div>

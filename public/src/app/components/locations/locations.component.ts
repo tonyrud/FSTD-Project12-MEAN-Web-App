@@ -44,6 +44,7 @@ export class LocationsComponent implements OnInit, OnDestroy {
   onSearchChange() {
     this._trailsService.searchTrails(`?limit=${this.selectedLimit}&q[activities_activity_type_name_eq]=hiking&q[city_cont]=${this.searchValue}&radius=${this.selectedDistance}`).subscribe(trails => {
       this.locations = trails.places
+      console.log(this.locations)
     })
 
   }

@@ -27,7 +27,6 @@ export class LocationsService {
   }
 
   createLocationQuery (locationData: Location) {
-    debugger
     return {
           name: locationData.name,
           description: locationData.description,
