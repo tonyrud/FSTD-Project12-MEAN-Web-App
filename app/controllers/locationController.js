@@ -41,10 +41,10 @@ exports.getUserLocations = async (req, res, next) => {
 exports.deleteLocation = async (req, res, next) => {
   const location = await Location.findOne({ unique_id: req.params.uniqueId })
 
-  const operator = await userController.pullOrAddToSet(req)
+  // const operator = await userController.pullOrAddToSet(req)
 
   await User.findByIdAndUpdate(req.user._id,
-    { [operator]: { locations: location._id } },
+    { '$pull': { locations: location._id } },
     { new: true })
 
   await location.remove()

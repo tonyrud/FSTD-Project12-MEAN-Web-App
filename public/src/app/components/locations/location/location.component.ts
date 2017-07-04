@@ -28,10 +28,10 @@ export class LocationComponent implements OnInit {
             // set imageLink to first element
             this.location.imageLink = this.location.images[0]
           } else {
-            this.location.imageLink = 'https://placeholdit.co//i/555x350'
+            this.location.imageLink = ''
           }
         } else {
-          this.location.imageLink = 'https://placeholdit.co//i/555x350'
+          this.location.imageLink = ''
         }
       })
   }

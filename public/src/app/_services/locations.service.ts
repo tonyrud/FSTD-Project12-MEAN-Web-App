@@ -18,7 +18,7 @@ export class LocationsService {
   }
 
   deleteUserLocation(locationId: Location) {
-    return this._reqService.apiGet(`locations/${locationId.unique_id}`)
+    return this._reqService.apiDelete(`locations/${locationId.unique_id}`)
   }
 
   getLocationImage(locationName: string) {
@@ -27,9 +27,10 @@ export class LocationsService {
   }
 
   createLocationQuery (locationData: Location) {
+    debugger
     return {
           name: locationData.name,
-          description: locationData.description || '',
+          description: locationData.description,
           lat: locationData.lat,
           lon: locationData.lon,
           city: locationData.city,

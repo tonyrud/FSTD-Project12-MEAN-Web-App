@@ -8,7 +8,7 @@
           {{location.name}}
         </h4>
         <p class="location-">{{location.city}}, {{location.state}}</p>
-        <button md-raised-button class="location-button" (click)="removeLocation(location)">Remove</button>
+        <button md-raised-button class="location-button" (click)="removeLocation(location, $event)">Remove</button>
       </li>
     </ul>
   </div>

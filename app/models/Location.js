@@ -21,6 +21,11 @@ const locationSchema = new Schema({
     type: String,
     trim: true
   },
+  description: {
+    type: String,
+    trim: true
+  },
+  activities: [ String ],
   lat: { type: Number },
   lon: { type: Number },
   unique_id: { type: Number, unique: true }

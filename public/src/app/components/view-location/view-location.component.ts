@@ -18,6 +18,7 @@ export class ViewLocationComponent implements OnInit {
     this.route.queryParams
       .subscribe((params: Params) => {
         this.viewData = params
+        console.log(this.viewData)
       })
   }
 

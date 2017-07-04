@@ -4,7 +4,12 @@
     <md-card-subtitle>{{ location.city }}, {{ location.state }}</md-card-subtitle>
   </md-card-header>
   <figure class="card-image-container">
-    <img md-card-image src="{{ location?.imageLink }}">
+    <img *ngIf="location?.imageLink; else noImage" md-card-image src="{{ location?.imageLink }}">
+    <ng-template #noImage>
+      <div class="card-image-container__no-image">
+        <p>No image found for this location</p>
+      </div>
+      </ng-template>
   </figure>
   <!--{{ location?.images[0] | json }}-->
   <md-card-content>

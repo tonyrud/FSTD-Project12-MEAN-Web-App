@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { TrailsService } from '../../_services/trails.service'
 import { Location } from '../../_interfaces/location.interface';
 import { LocationsService } from '../../_services/locations.service';
@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
   templateUrl: './locations.component.html',
   styleUrls: ['./locations.component.scss']
 })
-export class LocationsComponent implements OnInit {
+export class LocationsComponent implements OnInit, OnDestroy {
   users
   locations: Location
   selectedDistance = '25'
-  selectedLimit = '5'
+  selectedLimit = '25'
   searchValue = ''
   user: User
   distances = [
@@ -38,7 +38,6 @@ export class LocationsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.onSearchChange()
     this.user = this._usersService.getSignedUser()
   }
 
@@ -79,6 +78,11 @@ export class LocationsComponent implements OnInit {
       {
         queryParams: query
       })
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    // this._locationsService.unsubscribe();
   }
 
 }

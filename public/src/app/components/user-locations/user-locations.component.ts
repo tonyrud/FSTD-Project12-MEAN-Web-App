@@ -17,18 +17,17 @@ export class UserLocationsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._locationsService.getUserLocations()
-      .subscribe(data => {
-        this.userLocations = data.locations
-      })
+    this.loadUserLocations()
   }
 
-  removeLocation(location: Location) {
-    this._locationsService.saveLocation(location).subscribe(savedLocation => {
-      console.log('returned save!', savedLocation)
+  removeLocation(location: Location, event: Event) {
+    event.stopPropagation()
+    this._locationsService.deleteUserLocation(location).subscribe(savedLocation => {
+      console.log('location removed', savedLocation)
+      this.loadUserLocations()
     },
       error => {
-        console.log('error in save location: ', error)
+        console.log('error in remove location: ', error)
       })
   }
 
@@ -37,6 +36,13 @@ export class UserLocationsComponent implements OnInit {
     this.router.navigate(['/view-location'],
       {
         queryParams: query
+      })
+  }
+  
+  private loadUserLocations() {
+    this._locationsService.getUserLocations()
+      .subscribe(data => {
+        this.userLocations = data.locations
       })
   }
 

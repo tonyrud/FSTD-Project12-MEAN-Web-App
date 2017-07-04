@@ -1,5 +1,18 @@
 @import "~styles/_partials/_variables";
 
+md-card {
+    
+    transition: .2s ease-in-out;
+    transform: scale(1) translateY(0);
+    transform-origin: center bottom;
+    box-shadow: $shadow;
+
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: scale(1.02) translateY(-5px);
+    }
+}
+
 .mat-card-content {
     height: 45px;
     overflow: hidden;
@@ -23,4 +36,16 @@
     font-weight: bold;
     color: #666;
     font-size: 1.7em;
+}
+
+.card-image-container__no-image {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    font-weight: bold;
+    color: #777;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -16,6 +16,7 @@
     padding: 1em;
     transition: .5s ease-in-out;
     transform: scale(1);
+    transform-origin: center bottom;
 
     h4 {
         color: #333;
@@ -36,7 +37,7 @@
 }
 
 .location-button {
-    background: #e16b6b;
+    background: #cd4040;
     color: white;
     font-weight: bold;
     transition: .4s ease-in-out;
@@ -48,6 +49,6 @@
     margin-top: -17px;
 
     &:hover {
-      background: #cd4040;
+      background: #9d2727;
     }
 }
