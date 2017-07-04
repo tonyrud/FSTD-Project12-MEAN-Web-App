@@ -64,7 +64,7 @@ export class LocationsComponent implements OnInit {
     this.onSearchChange()
   }
 
-  saveLocation(location: Location) {
+  saveLocation(location: any) {
     this._locationsService.saveLocation(location).subscribe(savedLocation => {
       console.log('returned save!', savedLocation)
     },
@@ -74,20 +74,10 @@ export class LocationsComponent implements OnInit {
   }
 
   locationClicked(location: Location): void {
-    console.log(location)
+    const query = this._locationsService.createLocationQuery(location)
     this.router.navigate(['/view-location'],
       {
-        queryParams:
-        {
-          name: location.name,
-          description: location.description || '',
-          lat: location.lat,
-          lon: location.lon,
-          city: location.city,
-          country: location.country,
-          state: location.state,
-          image: location.imageLink 
-        }
+        queryParams: query
       })
   }
 

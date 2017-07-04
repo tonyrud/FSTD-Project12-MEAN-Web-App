@@ -42,14 +42,6 @@ export class RequestsService {
       .catch(this.handleError)
   }
 
-
-  // Flickr api request
-  public flickrSearchApiGet(searchItem: string): Observable<any> {
-    return this.http.get(`https://api.flickr.com/services/feeds/photos_public.gne?tags=${searchItem}&format=json&nojsoncallback=1`)
-      .map((response: Response) => response.json())
-      .catch(this.handleError)
-  }
-
   // Trail API Methods
   public trailApiGet(endpoint: string): Observable<any> {
     return this.http.get('https://trailapi-trailapi.p.mashape.com/' + endpoint, this.trailHeader())

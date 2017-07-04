@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { RouterModule } from '@angular/router';
 import { ViewLocationComponent } from './view-location/view-location.component';
+import { UserLocationsComponent } from './user-locations/user-locations.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ViewLocationComponent } from './view-location/view-location.component';
     LocationsComponent,
     LocationComponent,
     ViewLocationComponent,
+    UserLocationsComponent,
   ],
   exports: [
     FormCardComponent,

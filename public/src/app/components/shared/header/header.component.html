@@ -6,11 +6,11 @@
     <button md-button routerLink="login" routerLinkActive="active">Login</button>
   </div>
   <ng-template #loggedin>
-    <button md-button routerLink="search-locations" routerLinkActive="active">Search Locations</button>
-    <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>Hello, {{ user.firstName }}</button>
+    <button md-button routerLink="search-locations" routerLinkActive="active">Search</button>
+    <button md-button routerLink="account/saved-locations" routerLinkActive="active">Saved</button>
+    <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>Account</button>
   </ng-template>
 </md-toolbar>
 <md-menu x-position="before" #menu="mdMenu">
-  <button md-menu-item [routerLink]="['user', 'locations']">Saved Locations</button>
   <button md-menu-item routerLink="login">Logout</button>
 </md-menu>

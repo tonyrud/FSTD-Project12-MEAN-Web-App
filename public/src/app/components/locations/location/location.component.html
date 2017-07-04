@@ -9,11 +9,11 @@
   <!--{{ location?.images[0] | json }}-->
   <md-card-content>
     <p *ngIf="location.description; else noDesc">
-      {{ location.description.split(' ').slice(0, 25).join(' ') + '...' }}
+      {{ location.description.split(' ').slice(0, 15).join(' ') + '...' }}
     </p>
     <ng-template #noDesc>No description</ng-template>
   </md-card-content>
   <md-card-actions>
-    <button md-button (click)="submitSaveLocation(location)">LIKE</button>
+    <button md-button (click)="submitSaveLocation(location, $event)">LIKE</button>
   </md-card-actions>
 </md-card>

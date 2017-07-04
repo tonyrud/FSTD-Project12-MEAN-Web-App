@@ -13,8 +13,25 @@ export class LocationsService {
     return this._reqService.apiPost(`locations/${location.unique_id}`, location)
   }
 
+  getUserLocations() {
+    return this._reqService.apiGet(`locations/account`)
+  }
+
   getLocationImage(locationName: string) {
+    // using node server for api call due to local dev CORS
     return this._reqService.apiGet(`locations/image/` + locationName)
-    // return this._reqService.flickrSearchApiGet(locationName)
+  }
+
+  createLocationQuery (locationData: Location) {
+    return {
+          name: locationData.name,
+          description: locationData.description || '',
+          lat: locationData.lat,
+          lon: locationData.lon,
+          city: locationData.city,
+          country: locationData.country,
+          state: locationData.state,
+          image: locationData.imageLink 
+    }
   }
 }

@@ -30,3 +30,10 @@ exports.getImage = async (req, res, next) => {
     res.json({ images: images.data.items })
   }
 }
+
+exports.getUserLocations = async (req, res, next) => {
+  const userLocations = await Location.find({
+    _id: { $in: req.user.locations }
+  })
+  res.json({ locations: userLocations })
+}

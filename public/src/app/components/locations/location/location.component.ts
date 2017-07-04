@@ -36,7 +36,8 @@ export class LocationComponent implements OnInit {
       })
   }
 
-  submitSaveLocation(location: Location) {
+  submitSaveLocation(location: Location, event: Event) {
+    event.stopPropagation()
     this.saveLocation.emit(location)
   }
 }

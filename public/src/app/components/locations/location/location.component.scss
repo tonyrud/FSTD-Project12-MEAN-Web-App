@@ -7,7 +7,7 @@
 
 .card-image-container {
     overflow: hidden;
-    height: 250px;
+    height: 195px;
     margin-bottom: 1em;
     width: calc(100% + 48px);
     margin: 0 -24px 16px -24px;
@@ -19,7 +19,8 @@
 }
 
 .mat-card-title {
+    min-height: 56px;
     font-weight: bold;
-    color: #888;
+    color: #666;
     font-size: 1.7em;
 }
