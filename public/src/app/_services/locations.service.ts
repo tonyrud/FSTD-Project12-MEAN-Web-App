@@ -27,6 +27,7 @@ export class LocationsService {
   }
 
   createLocationQuery (locationData: Location) {
+    const parsedActivites = this.parseLocationActivities(locationData)
     return {
           name: locationData.name,
           description: locationData.description,
@@ -35,7 +36,18 @@ export class LocationsService {
           city: locationData.city,
           country: locationData.country,
           state: locationData.state,
-          image: locationData.imageLink 
+          image: locationData.imageLink,
+          activitiesNames: parsedActivites.names,
+          activitiesUrls: parsedActivites.url,
+          activitiesDescriptions: parsedActivites.description
+    }
+  }
+
+  parseLocationActivities (location: Location) {
+    return {
+      names: location.activities.map(item => item.name),
+      url: location.activities.map(item => item.url),
+      description: location.activities.map(item => item.description)
     }
   }
 }

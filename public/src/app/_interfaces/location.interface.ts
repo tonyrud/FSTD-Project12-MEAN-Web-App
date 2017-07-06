@@ -11,4 +11,12 @@ export interface Location {
   images: string[]
   imageLink: string
   description: string
+  activities: Activities[]
+}
+
+interface Activities {
+  description: string
+  name: string
+  url: string
+  _id: string
 }
