@@ -1,9 +1,18 @@
 <div class="single">
-  <div class="single__hero"><img src="{{viewData.image}}" class="single__image"/>
-    <h2 class="title title--single">{{ viewData.name }}</h2>
+  <div class="single__hero"><img src="{{location?.image}}" class="single__image" />
+    <h2 class="title title--single">{{ location?.name }}</h2>
   </div>
 </div>
-<div class="single__details inner"><img class="single__map"/>
-  <p class="single__location">{{viewData.city}}, {{viewData.state}} </p>
-  <p> {{viewData.description}} </p>
+<div class="single__details inner"><img class="single__map" />
+  <p class="single__location">{{location?.city}}, {{location?.state}} </p>
+  <p> {{location?.description}} </p>
 </div>
+<ul *ngIf="location?.activities" class="container__list-items">
+  <li class="list-item" *ngFor="let activity of location.activities">
+    <p>
+      {{activity?.name}}
+    </p>
+    <p class="location-">{{activity?.description}}</p>
+    <a href="{{activity.url}}" target="_blank">{{activity?.url}}</a>
+  </li>
+</ul>
