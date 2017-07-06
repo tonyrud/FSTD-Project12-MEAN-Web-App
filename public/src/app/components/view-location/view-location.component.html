@@ -1,18 +1,28 @@
 <div class="single">
-  <div class="single__hero"><img src="{{location?.image}}" class="single__image" />
+  <div class="single__hero">
+    <img *ngIf="location?.image; else noImage" src="{{location?.image}}" class="single__image" />
+    <ng-template #noImage>
+      <img src="./../../../assets/img/hiking-in-east-greenland-1.jpg" class="single__image" />
+    </ng-template>
     <h2 class="title title--single">{{ location?.name }}</h2>
   </div>
 </div>
-<div class="single__details inner"><img class="single__map" />
+<div class="single__details inner">
   <p class="single__location">{{location?.city}}, {{location?.state}} </p>
   <p> {{location?.description}} </p>
 </div>
-<ul *ngIf="location?.activities" class="container__list-items">
-  <li class="list-item" *ngFor="let activity of location.activities">
-    <p>
-      {{activity?.name}}
-    </p>
-    <p class="location-">{{activity?.description}}</p>
-    <a href="{{activity.url}}" target="_blank">{{activity?.url}}</a>
-  </li>
-</ul>
+<div class="activities-container">
+  <h5>Activities</h5>
+  <ul *ngIf="location?.activities" class="activities-container__list-items">
+    <li class="list-item" *ngFor="let activity of location.activities">
+      <p class="list-item__name">
+        {{activity?.name}}
+        <a href="{{activity.url}}" target="_blank">
+          <md-icon>link</md-icon>
+        </a>
+
+      </p>
+      <p class="location-">{{activity?.description}}</p>
+    </li>
+  </ul>
+</div>

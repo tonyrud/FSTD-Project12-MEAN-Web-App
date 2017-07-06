@@ -29,17 +29,9 @@ export class LocationsService {
   createLocationQuery (locationData: Location) {
     const parsedActivites = this.parseLocationActivities(locationData)
     return {
-          name: locationData.name,
-          description: locationData.description,
           lat: locationData.lat,
           lon: locationData.lon,
-          city: locationData.city,
-          country: locationData.country,
-          state: locationData.state,
           image: locationData.imageLink,
-          activitiesNames: parsedActivites.names,
-          activitiesUrls: parsedActivites.url,
-          activitiesDescriptions: parsedActivites.description
     }
   }
 

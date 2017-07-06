@@ -73,7 +73,8 @@ export class LocationsComponent implements OnInit, OnDestroy {
   }
 
   locationClicked(location: Location): void {
-    const query = this._locationsService.createLocationQuery(location)
+    const query: any = this._locationsService.createLocationQuery(location)
+    query.prevSearch = this.searchValue
     this.router.navigate(['/view-location'],
       {
         queryParams: query
