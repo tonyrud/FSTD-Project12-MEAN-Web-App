@@ -1,4 +1,10 @@
 <div class="inner">
-  <h3>Welcome!</h3>
-
+  <div *ngIf="!user; else loggedIn">
+    <h3 class="section-header">Welcome!</h3>
+    <p class="section-sub">Create an account or login and save your searched hiking locations!</p>
+  </div>
+  <ng-template #loggedIn>
+    <h3 class="section-header">Welcome, {{user.firstName}}!</h3>
+    <p class="section-sub">You're logged in! Go and search for locations that interest you, or check the ones you've already saved!</p>
+  </ng-template>
 </div>

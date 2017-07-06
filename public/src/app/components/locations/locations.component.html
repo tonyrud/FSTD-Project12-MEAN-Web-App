@@ -1,5 +1,6 @@
 <div class="inner">
   <h3 class="section-header">Hiking Locations</h3>
+  <p class="section-sub">You can search and save locations, as well as filter total results, and distance.</p>
   <div class="search-container">
     <md-input-container class="example-full-width">
       <input [(ngModel)]="searchValue" (input)="onInput($event.target.value)" mdInput placeholder="Search for hiking locations">
@@ -15,11 +16,8 @@
       </md-option>
     </md-select>
   </div>
-  <!--<md-slider min="1" max="50" step="1" value="1"></md-slider>-->
-  <div class="locations">
-    <location *ngFor="let location of locations; index as i;" class="location" [location]="location" (saveLocation)="saveLocation($event)"></location>
+  <div *ngIf="locations?.length; else noLocations" class="locations">
+    <location *ngFor="let location of locations; index as i;" class="location" [location]="location" (saveLocation)="saveLocation($event)" (click)="locationClicked(location)"></location>
   </div>
+  <ng-template #noLocations><p class="no-locations">No Locations Found</p></ng-template>
 </div>
-<form>
-
-</form>

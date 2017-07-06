@@ -6,7 +6,7 @@
 }
 
 .search-container {
-    margin: 1em auto;
+    margin: 3em auto 2.5em;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -22,9 +22,8 @@
 .location {
     background: white;
     margin: 10px 0;
-    width: 24%;
+    width: 32%;
     cursor: pointer;
-    box-shadow: $shadow !important;
 
     &--wide {
         width: 100%;
@@ -46,4 +45,9 @@
     @media all and (max-width: 550px) {
         width: 100%;
     }
+}
+
+.no-locations {
+    margin: 3em auto;
+    text-align: center;
 }

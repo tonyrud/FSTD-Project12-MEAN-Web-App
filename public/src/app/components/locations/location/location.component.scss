@@ -1,41 +1,51 @@
 @import "~styles/_partials/_variables";
 
-// .location {
-//     background: white;
-//     margin: 10px 0;
-//     width: 24%;
-//     box-shadow: $shadow !important;
+md-card {
+    
+    transition: .2s ease-in-out;
+    transform: scale(1) translateY(0);
+    transform-origin: center bottom;
+    box-shadow: $shadow;
 
-//     &--wide {
-//         width: 100%;
-//     }
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: scale(1.01) translateY(-5px);
+    }
+}
 
-//     &__details {
-//         padding: 2rem;
-
-//         p {
-//             line-height: 1.2;
-//             margin-bottom: 0;
-//         }
-//     }
-
-//     @media all and (max-width: 850px) {
-//         width: 48%;
-//     }
-
-//     @media all and (max-width: 550px) {
-//         width: 100%;
-//     }
-// }
 .mat-card-content {
-    max-height: 98px;
+    height: 45px;
     overflow: hidden;
 }
 
 .card-image-container {
     overflow: hidden;
-    max-height: 250px;
+    height: 195px;
     margin-bottom: 1em;
     width: calc(100% + 48px);
     margin: 0 -24px 16px -24px;
+
+    img {
+        margin: auto;
+        width: 100%;
+    }
+}
+
+.mat-card-title {
+    min-height: 56px;
+    font-weight: bold;
+    color: #666;
+    font-size: 1.7em;
+}
+
+.card-image-container__no-image {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    font-weight: bold;
+    color: #777;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

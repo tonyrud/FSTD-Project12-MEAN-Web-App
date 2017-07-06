@@ -1,42 +1,43 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { TrailsService } from '../../_services/trails.service'
 import { Location } from '../../_interfaces/location.interface';
 import { LocationsService } from '../../_services/locations.service';
 import { UsersService } from '../../_services/users.service';
 import { User } from '../../_interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'locations',
   templateUrl: './locations.component.html',
   styleUrls: ['./locations.component.scss']
 })
-export class LocationsComponent implements OnInit {
+export class LocationsComponent implements OnInit, OnDestroy {
   users
   locations: Location
   selectedDistance = '25'
-  selectedLimit = '5'
-  searchValue = 'Seattle'
+  selectedLimit = '25'
+  searchValue = ''
   user: User
   distances = [
-    {value: '10', viewValue: '10'},
-    {value: '25', viewValue: '25'},
-    {value: '50', viewValue: '50'},
-    {value: '100', viewValue: '100'}
+    { value: '10', viewValue: '10' },
+    { value: '25', viewValue: '25' },
+    { value: '50', viewValue: '50' },
+    { value: '100', viewValue: '100' }
   ]
   resultsLimits = [
-    {value: '5', viewValue: '5'},
-    {value: '25', viewValue: '25'},
-    {value: '50', viewValue: '50'}
+    { value: '5', viewValue: '5' },
+    { value: '25', viewValue: '25' },
+    { value: '50', viewValue: '50' }
   ]
 
   constructor(
     private _trailsService: TrailsService,
     private _locationsService: LocationsService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.onSearchChange()
     this.user = this._usersService.getSignedUser()
   }
 
@@ -47,28 +48,42 @@ export class LocationsComponent implements OnInit {
 
   }
 
-  onInput (value: string) {
+  onInput(value: string) {
     this.searchValue = value
     this.onSearchChange()
   }
 
-  onRange (value: string) {
+  onRange(value: string) {
     this.selectedDistance = value
     this.onSearchChange()
   }
 
-  onTotalResults (value: string) {
+  onTotalResults(value: string) {
     this.selectedLimit = value
     this.onSearchChange()
   }
 
-  saveLocation (location: Location) {
+  saveLocation(location: any) {
     this._locationsService.saveLocation(location).subscribe(savedLocation => {
       console.log('returned save!', savedLocation)
     },
-    error => {
-      console.log('error in save location: ', error)
-    })
+      error => {
+        console.log('error in save location: ', error)
+      })
+  }
+
+  locationClicked(location: Location): void {
+    const query: any = this._locationsService.createLocationQuery(location)
+    query.prevSearch = this.searchValue
+    this.router.navigate(['/view-location'],
+      {
+        queryParams: query
+      })
+  }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    // this._locationsService.unsubscribe();
   }
 
 }

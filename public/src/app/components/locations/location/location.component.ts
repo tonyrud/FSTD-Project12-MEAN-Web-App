@@ -19,17 +19,25 @@ export class LocationComponent implements OnInit {
   ngOnInit() {
     this._locationService.getLocationImage(this.location.name)
       .subscribe(data => {
-        if (data.images) {
-          this.location.images = data.images.map(image => {
-            return image.media.m || 'https://placeholdit.co//i/555x350'
-          })
-          this.location.imageLink = this.location.images[0]
-
+        // check if images returned
+        if (Object.keys(data).length) {
+          // check if any items in returned images
+          if (data.images.length) {
+            // map over images and return image string
+            this.location.images = data.images.map(image => image.media.m)
+            // set imageLink to first element
+            this.location.imageLink = this.location.images[0]
+          } else {
+            this.location.imageLink = ''
+          }
+        } else {
+          this.location.imageLink = ''
         }
       })
   }
 
-  submitSaveLocation (location: Location) {
+  submitSaveLocation(location: Location, event: Event) {
+    event.stopPropagation()
     this.saveLocation.emit(location)
   }
 }

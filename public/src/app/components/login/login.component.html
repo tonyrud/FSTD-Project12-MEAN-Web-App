@@ -1,6 +1,6 @@
 <div class="card-form">
   <form [formGroup]='loginForm' class="card-form__form" novalidate>
-    <form-card [formTitle]='"Login"' [btnPrimary]='"Login"' [btnSecondary]='"Forgot Password"' (primaryClicked)="loginSubmit(f, $event)" (secondaryClicked)="forgotPassword($event)">
+    <form-card [formTitle]='"Login"' [btnPrimary]='"Login"' (primaryClicked)="loginSubmit(f, $event)" (secondaryClicked)="forgotPassword($event)">
       <md-input-container>
         <input name="email" #email formControlName="email" mdInput placeholder="email" type="email" autocomplete="off">
       </md-input-container>
