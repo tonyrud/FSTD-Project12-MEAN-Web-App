@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { LocationsService } from '../../_services/locations.service';
 import { Location } from '../../_interfaces/location.interface';
 import { Router } from '@angular/router';
+import { fadeInAnimation } from '../../_animations/fadeIn.animation';
+import { routerTransition } from '../../_animations/router.animations';
 
 @Component({
   selector: 'user-locations',
   templateUrl: './user-locations.component.html',
-  styleUrls: ['./user-locations.component.scss']
+  styleUrls: ['./user-locations.component.scss'],
+  animations: [routerTransition() ],
+  host: {'[@routerTransition]': ''}
 })
 export class UserLocationsComponent implements OnInit {
   userLocations: Location[]

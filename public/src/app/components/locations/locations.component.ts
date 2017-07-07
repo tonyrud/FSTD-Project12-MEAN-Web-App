@@ -1,17 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core'
 import { TrailsService } from '../../_services/trails.service'
 import { Location } from '../../_interfaces/location.interface';
 import { LocationsService } from '../../_services/locations.service';
 import { UsersService } from '../../_services/users.service';
 import { User } from '../../_interfaces/user.interface';
 import { Router } from '@angular/router';
+import { fadeInAnimation, slideInDownAnimation } from '../../_animations/fadeIn.animation';
+import { routerTransition } from '../../_animations/router.animations';
 
 @Component({
   selector: 'locations',
   templateUrl: './locations.component.html',
-  styleUrls: ['./locations.component.scss']
+  styleUrls: ['./locations.component.scss'],
+  animations: [routerTransition() ],
+  host: {'[@routerTransition]': ''}
 })
 export class LocationsComponent implements OnInit, OnDestroy {
+
   users
   locations: Location
   selectedDistance = '25'

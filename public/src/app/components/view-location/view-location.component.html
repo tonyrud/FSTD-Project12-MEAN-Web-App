@@ -1,9 +1,10 @@
 <div class="single">
   <div class="single__hero">
-    <img *ngIf="location?.image; else noImage" src="{{location?.image}}" class="single__image" />
-    <ng-template #noImage>
+    <!--<img *ngIf="location?.image; else noImage" src="{{location?.image}}" class="single__image" />-->
       <img src="./../../../assets/img/hiking-in-east-greenland-1.jpg" class="single__image" />
-    </ng-template>
+    <!--<ng-template #noImage>
+      <img src="./../../../assets/img/hiking-in-east-greenland-1.jpg" class="single__image" />
+    </ng-template>-->
     <h2 class="title title--single">{{ location?.name }}</h2>
   </div>
 </div>
