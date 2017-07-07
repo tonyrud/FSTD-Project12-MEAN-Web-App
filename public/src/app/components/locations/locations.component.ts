@@ -20,7 +20,7 @@ export class LocationsComponent implements OnInit, OnDestroy {
   users
   locations: Location
   selectedDistance = '25'
-  selectedLimit = '25'
+  selectedLimit = '5'
   searchValue = ''
   user: User
   distances = [
@@ -70,7 +70,7 @@ export class LocationsComponent implements OnInit, OnDestroy {
 
   saveLocation(location: any) {
     this._locationsService.saveLocation(location).subscribe(savedLocation => {
-      console.log('returned save!', savedLocation)
+
     },
       error => {
         console.log('error in save location: ', error)

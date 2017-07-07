@@ -8,7 +8,7 @@ import { routerTransition } from '../../_animations/router.animations';
   selector: 'view-component',
   templateUrl: './view-location.component.html',
   styleUrls: ['./view-location.component.scss'],
-  animations: [routerTransition() ],
+  animations: [routerTransition(),  ],
   host: {'[@routerTransition]': ''}
 })
 export class ViewLocationComponent implements OnInit {
