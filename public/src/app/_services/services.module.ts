@@ -5,6 +5,7 @@ import { UsersService } from './users.service';
 import { AuthenticationService } from './authentication.service';
 import { TrailsService } from './trails.service';
 import { LocationsService } from './locations.service';
+import { AlertService } from './alert.service';
 
 @NgModule({
   providers: [
@@ -12,7 +13,8 @@ import { LocationsService } from './locations.service';
     UsersService,
     AuthenticationService,
     TrailsService,
-    LocationsService
+    LocationsService,
+    AlertService
   ]
 })
 export class ServicesModule { }
