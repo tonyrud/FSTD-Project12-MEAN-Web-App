@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const Location = mongoose.model('Location')
 const promisify = require('es6-promisify')
-const mail = require('../handlers/mail')
 const crypto = require('crypto')
+// const mail = require('../handlers/mail')
 // const passport = require('passport')
 
 exports.getUsers = async (req, res, next) => {
@@ -69,7 +69,6 @@ exports.validateRegister = (req, res, next) => {
 exports.register = async (req, res, next) => {
   const user = new User(req.body)
   user.save().then(success => {
-    console.log(success)
     res.json({ message: 'Success registering user', user })
   }).catch(error => {
     const err = new Error(error.errors.email.message)

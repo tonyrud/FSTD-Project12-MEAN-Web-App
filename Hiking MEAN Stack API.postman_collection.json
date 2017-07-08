@@ -8,16 +8,272 @@
 	},
 	"item": [
 		{
+			"name": "Locations",
+			"description": "",
+			"item": [
+				{
+					"name": "locations/save",
+					"request": {
+						"url": "{{url}}/api/locations/21935",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dG9ucnVkbnlAZ21haWwuY29tOiQyYSQxMCRjZ09xTWFhbmtMZG16b3gzTG0zSGNlNmVqOUJDd0J1R2pLaTJudGtVc1d2T2xEOVg1UDF2bQ==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"city\": \"Seattle\",\n\t\"country\":\" United States\",\n\t\"lat\": 47.659448,\n\t\"lon\":-122.376082,\n\t\"name\":\"Lake Washington Ship Canal\",\n\t\"state\": \"Washington\",\n\t\"unique_id\": 21935\n}"
+						},
+						"description": "This will save locations to logged in user"
+					},
+					"response": []
+				},
+				{
+					"name": "locations/image",
+					"request": {
+						"url": "{{url}}/api/locations/image/mountains",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"city\": \"Seattle\",\n\t\"country\":\" United States\",\n\t\"lat\": 47.659448,\n\t\"lon\":-122.376082,\n\t\"name\":\"Lake Washington Ship Canal\",\n\t\"state\": \"Washington\",\n\t\"unique_id\": 21935\n}"
+						},
+						"description": "This will save locations to logged in user"
+					},
+					"response": []
+				},
+				{
+					"name": "locations/user locations",
+					"request": {
+						"url": "{{url}}/api/locations/account",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dG9ucnVkbnlAZ21haWwuY29tOiQyYSQxMCRjZ09xTWFhbmtMZG16b3gzTG0zSGNlNmVqOUJDd0J1R2pLaTJudGtVc1d2T2xEOVg1UDF2bQ==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"city\": \"Seattle\",\n\t\"country\":\" United States\",\n\t\"lat\": 47.659448,\n\t\"lon\":-122.376082,\n\t\"name\":\"Lake Washington Ship Canal\",\n\t\"state\": \"Washington\",\n\t\"unique_id\": 21935\n}"
+						},
+						"description": "This will save locations to logged in user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Testing",
+			"description": "",
+			"item": [
+				{
+					"name": "Error test",
+					"request": {
+						"url": "{{url}}/api/",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				},
+				{
+					"name": "Flickr test",
+					"request": {
+						"url": {
+							"raw": "http://api.flickr.com/services/feeds/photos_public.gne?tag=mountains&format=json&nojsoncallback=1",
+							"protocol": "http",
+							"host": [
+								"api",
+								"flickr",
+								"com"
+							],
+							"path": [
+								"services",
+								"feeds",
+								"photos_public.gne"
+							],
+							"query": [
+								{
+									"key": "tag",
+									"value": "mountains",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "format",
+									"value": "json",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "nojsoncallback",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Users",
 			"description": "",
 			"item": [
 				{
 					"name": "users/index",
 					"request": {
-						"url": "localhost:4000/api/users",
+						"url": "{{url}}/api/users",
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{basic-auth}}",
+								"description": ""
+							}
+						],
 						"body": {},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				},
+				{
+					"name": "users/login",
+					"request": {
+						"url": "{{url}}/api/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"tonrudny@gmail.com\",\n\t\"password\": \"123\"\n}"
+						},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				},
+				{
+					"name": "users/logout",
+					"request": {
+						"url": "{{url}}/api/logout",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"weiser660r@hotmail.com\",\n\t\"password\": \"123\"\n}"
+						},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				},
+				{
+					"name": "users/register",
+					"request": {
+						"url": "{{url}}/api/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n\t\"firstName\": \"Tony2\",\n\t\"lastName\": \"Rudny2\",\n\t\"email\": \"tonrudny@gmail.com\",\n\t\"password\": \"123\",\n\t\"confirmPassword\": \"123\"\n}"
+						},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				},
+				{
+					"name": "users/forgot password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"reset-token\", jsonData.token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/api/forgot",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"tonrudny@gmail.com\"\n}"
+						},
+						"description": "This will get all users from database"
+					},
+					"response": []
+				},
+				{
+					"name": "users/reset password",
+					"request": {
+						"url": "{{url}}/api/resetPassword/{{reset-token}}",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"tonrudny@gmail.com\"\n}"
+						},
 						"description": "This will get all users from database"
 					},
 					"response": []
