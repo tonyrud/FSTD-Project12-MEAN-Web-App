@@ -11,7 +11,7 @@ import { slideIn } from '../../_animations/slideInOut.animation';
   styleUrls: ['./view-location.component.scss'],
   animations: [
     routerTransition(),
-    slideIn()
+    slideIn(1000, 100, 'ease-out', 300)
   ],
   host: { '[@routerTransition]': '' }
 })

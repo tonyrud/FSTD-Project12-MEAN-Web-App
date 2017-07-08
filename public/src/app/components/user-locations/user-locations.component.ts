@@ -15,7 +15,7 @@ import { AlertService } from '../../_services/alert.service';
   styleUrls: ['./user-locations.component.scss'],
   animations: [
     routerTransition(),
-    slideIn()
+    slideIn(700, 100, 'ease-out', 200)
   ],
   host: { '[@routerTransition]': '' }
 })
