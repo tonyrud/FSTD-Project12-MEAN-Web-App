@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { UsersService } from '../../_services/users.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../_services/alert.service';
 
 @Component({
   selector: 'register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
     private _fb: FormBuilder,
     private _users: UsersService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -35,11 +37,11 @@ export class RegisterComponent implements OnInit {
   registerSubmit(event) {
     this._users.registerUser(this.registerForm.value).subscribe(
       res => {
-        console.log(res)
+        this._alertService.showMessage('success', 'Success', `You're now registered`)
         this.router.navigate([this.returnUrl])
       },
       error => {
-        console.log('error registering user:', error)
+        this._alertService.showMessage('error', 'Error', error.message)
       }
     )
   }

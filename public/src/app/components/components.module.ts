@@ -11,13 +11,17 @@ import { RouterModule } from '@angular/router';
 import { ViewLocationComponent } from './view-location/view-location.component';
 import { UserLocationsComponent } from './user-locations/user-locations.component';
 
+import {GrowlModule} from 'primeng/primeng';
+import { AlertComponent } from './alert/alert.component';
+
 @NgModule({
   imports: [
     CommonModule,
     MyMaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    GrowlModule
   ],
   declarations: [
     FormCardComponent,
@@ -25,10 +29,12 @@ import { UserLocationsComponent } from './user-locations/user-locations.componen
     LocationComponent,
     ViewLocationComponent,
     UserLocationsComponent,
+    AlertComponent,
   ],
   exports: [
     FormCardComponent,
-    LocationComponent
+    LocationComponent,
+    AlertComponent
   ]
 })
 export class ComponentsModule { }

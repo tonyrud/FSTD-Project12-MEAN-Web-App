@@ -1,21 +1,26 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core'
 import { TrailsService } from '../../_services/trails.service'
 import { Location } from '../../_interfaces/location.interface';
 import { LocationsService } from '../../_services/locations.service';
 import { UsersService } from '../../_services/users.service';
 import { User } from '../../_interfaces/user.interface';
 import { Router } from '@angular/router';
+import { routerTransition } from '../../_animations/router.animations';
+import { AlertService } from '../../_services/alert.service';
 
 @Component({
   selector: 'locations',
   templateUrl: './locations.component.html',
-  styleUrls: ['./locations.component.scss']
+  styleUrls: ['./locations.component.scss'],
+  animations: [routerTransition()],
+  host: { '[@routerTransition]': '' }
 })
 export class LocationsComponent implements OnInit, OnDestroy {
+
   users
   locations: Location
   selectedDistance = '25'
-  selectedLimit = '25'
+  selectedLimit = '5'
   searchValue = ''
   user: User
   distances = [
@@ -34,7 +39,8 @@ export class LocationsComponent implements OnInit, OnDestroy {
     private _trailsService: TrailsService,
     private _locationsService: LocationsService,
     private _usersService: UsersService,
-    private router: Router
+    private router: Router,
+    private _alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -64,11 +70,12 @@ export class LocationsComponent implements OnInit, OnDestroy {
   }
 
   saveLocation(location: any) {
-    this._locationsService.saveLocation(location).subscribe(savedLocation => {
-      console.log('returned save!', savedLocation)
-    },
+    this._locationsService.saveLocation(location)
+      .subscribe(savedLocation => {
+        this._alertService.showMessage('success', 'Success', 'Location saved to your profile')
+      },
       error => {
-        console.log('error in save location: ', error)
+        this._alertService.showMessage('error', 'Error', 'There was an issue saving location')
       })
   }
 

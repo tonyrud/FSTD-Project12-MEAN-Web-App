@@ -68,8 +68,13 @@ exports.validateRegister = (req, res, next) => {
 
 exports.register = async (req, res, next) => {
   const user = new User(req.body)
-  await user.save()
-  res.json({ message: 'Success registering user', user })
+  user.save().then(success => {
+    console.log(success)
+    res.json({ message: 'Success registering user', user })
+  }).catch(error => {
+    const err = new Error(error.errors.email.message)
+    next(err)
+  })
 }
 
 exports.forgot = async (req, res, next) => {

@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+// @import "~font-awesome/css/font-awesome.min.css";
+@import "~primeng/resources/primeng.min.css";
+@import "~primeng/resources/themes/bootstrap/theme.css";
 @import './_partials/_reset';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import './_partials/_variables';
 @import './_partials/_typography';
 

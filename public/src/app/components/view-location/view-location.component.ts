@@ -2,11 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '../../_interfaces/location.interface';
 import { TrailsService } from '../../_services/trails.service';
+import { routerTransition } from '../../_animations/router.animations';
+import { slideIn } from '../../_animations/slideInOut.animation';
 
 @Component({
   selector: 'view-component',
   templateUrl: './view-location.component.html',
-  styleUrls: ['./view-location.component.scss']
+  styleUrls: ['./view-location.component.scss'],
+  animations: [
+    routerTransition(),
+    slideIn(1000, 100, 'ease-out', 300)
+  ],
+  host: { '[@routerTransition]': '' }
 })
 export class ViewLocationComponent implements OnInit {
   location: any
