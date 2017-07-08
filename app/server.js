@@ -1,7 +1,4 @@
 const express = require('express')
-const session = require('express-session')
-const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo')(session)
 const path = require('path')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
@@ -10,6 +7,7 @@ const passport = require('passport')
 const expressValidator = require('express-validator')
 const routes = require('./routes/index')
 const errorHandlers = require('./handlers/errorHandlers')
+const cors = require('cors')
 require('./handlers/passport')
 
 // create Express app
@@ -24,15 +22,16 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, './../dist')))
 
 // Allows CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  if (req.method === 'OPTIONS') {
-    return res.status(200).json({})
-  }
-  next()
-})
+app.use(cors())
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+//   if (req.method === 'OPTIONS') {
+//     return res.status(200).json({})
+//   }
+//   next()
+// })
 
 // Use morgan for http request logging in dev mode
 app.use(morgan('dev'))
@@ -51,24 +50,9 @@ app.use(cookieParser())
  -- passport.js setup --
 *********************/
 
-// Sessions store data on visitors from request to request
-// This keeps users logged in
-// app.use(session({
-//   secret: process.env.SECRET,
-//   key: process.env.KEY,
-//   resave: false,
-//   saveUninitialized: false,
-//   store: new MongoStore({ mongooseConnection: mongoose.connection })
-// }))
-
 // Passport JS handles logins
 app.use(passport.initialize())
 app.use(passport.session())
-
-// app.use((req, res, next) => {
-//   req.login = promisify(req.login, req);
-//   next();
-// });
 
 /*********************
  -- routing setup --
