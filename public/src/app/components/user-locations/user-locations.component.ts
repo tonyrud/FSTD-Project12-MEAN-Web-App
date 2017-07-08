@@ -39,19 +39,17 @@ export class UserLocationsComponent implements OnInit {
 
 
   showSuccess() {
-    // this.msgs = [];
     this._alertService.showMessage('error', 'Error message', 'Order submitted')
-    // this.msgs.push({ severity: 'error', summary: 'Success Message', detail: 'Order submitted' });
   }
 
   removeLocation(location: Location, event: Event) {
     event.stopPropagation()
     this._locationsService.deleteUserLocation(location).subscribe(savedLocation => {
-      console.log('location removed', savedLocation)
       this.loadUserLocations()
+      this._alertService.showMessage('success', 'Success', 'Location removed from your profile')
     },
       error => {
-        console.log('error in remove location: ', error)
+        this._alertService.showMessage('error', 'Error', 'There was an issue removing a location')
       })
   }
 

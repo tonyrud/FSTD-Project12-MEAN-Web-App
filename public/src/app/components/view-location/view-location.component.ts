@@ -3,13 +3,17 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '../../_interfaces/location.interface';
 import { TrailsService } from '../../_services/trails.service';
 import { routerTransition } from '../../_animations/router.animations';
+import { slideIn } from '../../_animations/slideInOut.animation';
 
 @Component({
   selector: 'view-component',
   templateUrl: './view-location.component.html',
   styleUrls: ['./view-location.component.scss'],
-  animations: [routerTransition(),  ],
-  host: {'[@routerTransition]': ''}
+  animations: [
+    routerTransition(),
+    slideIn()
+  ],
+  host: { '[@routerTransition]': '' }
 })
 export class ViewLocationComponent implements OnInit {
   location: any

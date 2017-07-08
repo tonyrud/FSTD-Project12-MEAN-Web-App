@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthenticationService } from '../../_services/authentication.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../../_services/users.service';
+import { AlertService } from '../../_services/alert.service';
 
 interface UserLogin {
   email: string
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _auth: AuthenticationService,
     private router: Router,
-    private _user: UsersService
+    private _user: UsersService,
+    private _alertService: AlertService    
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home'])
       },
       error => {
-        console.error('err login in:', error)
+        this._alertService.showMessage('error', 'Error', error.message)
       }
     )
   }

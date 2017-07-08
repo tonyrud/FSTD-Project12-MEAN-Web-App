@@ -1,7 +1,7 @@
 // import the required animation functions from the angular animations module
 import { trigger, state, animate, transition, style, query, stagger, keyframes } from '@angular/animations';
 
-export function slideIn() {
+export function slideIn(duration?: number, delay?: number) {
     return trigger('slideIn', [
         transition('* => *', [
 

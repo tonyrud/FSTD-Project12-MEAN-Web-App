@@ -2,7 +2,6 @@
 <div @slideIn class="inner">
   <h3  class="section-header slide-in">Saved Locations</h3>
   <p class="section-sub slide-in">Locations you've saved. Click any to get more details, or delete from your list.</p>
-  <button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
   <div *ngIf="userLocations?.length; else noSavedLocations" class="container">
     <ul class="container__list-items">
       <li  class="list-item" *ngFor="let location of userLocations" (click)="locationClicked(location)">

@@ -7,12 +7,8 @@ import { routerTransition } from '../../_animations/router.animations';
 
 @Component({
   selector: 'alert',
-  template: `<p-growl class="slide-in" [(value)]="message"></p-growl>`,
-  styleUrls: ['./alert.component.scss'],
-  animations: [
-    routerTransition()
-  ],
-  host: { '[@routerTransition]': '' }
+  template: `<p-growl [(value)]="message"></p-growl>`,
+  styles: ['']
 })
 export class AlertComponent implements OnInit {
 
@@ -21,6 +17,7 @@ export class AlertComponent implements OnInit {
   constructor(private alertService: AlertService) { }
 
   ngOnInit() {
+    // subscribe to message service subject
     this.alertService.getMessage().subscribe(message => {
       // clear previous message data
       this.message = []
