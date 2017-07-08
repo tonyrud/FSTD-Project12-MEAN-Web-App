@@ -11,13 +11,16 @@ import { RouterModule } from '@angular/router';
 import { ViewLocationComponent } from './view-location/view-location.component';
 import { UserLocationsComponent } from './user-locations/user-locations.component';
 
+import {GrowlModule} from 'primeng/primeng';
+
 @NgModule({
   imports: [
     CommonModule,
     MyMaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    GrowlModule
   ],
   declarations: [
     FormCardComponent,

@@ -5,7 +5,6 @@ import { LocationsService } from '../../_services/locations.service';
 import { UsersService } from '../../_services/users.service';
 import { User } from '../../_interfaces/user.interface';
 import { Router } from '@angular/router';
-import { fadeInAnimation, slideInDownAnimation } from '../../_animations/fadeIn.animation';
 import { routerTransition } from '../../_animations/router.animations';
 
 @Component({

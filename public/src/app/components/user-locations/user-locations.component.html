@@ -1,7 +1,15 @@
-<div class="inner">
-  <h3 class="section-header">Saved Locations</h3>
-  <p class="section-sub">Locations you've saved. Click any to get more details, or delete from your list.</p>
-  <div *ngIf="userLocations?.length; else noSavedLocations" class="container">
+<p-growl [(value)]="msgs"></p-growl>
+<div @slideIn class="inner">
+  <h3  class="section-header slide-in">Saved Locations</h3>
+  <p class="section-sub slide-in">Locations you've saved. Click any to get more details, or delete from your list.</p>
+  <button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
+  <!--<button (click)="toggle()">Show / Hide Items</button>
+  <div id="container" [@listAnimation]="items.length">
+    <div id="list" *ngFor="let item of items">
+      {{ item }}
+    </div>
+  </div>-->
+  <!--<div *ngIf="userLocations?.length; else noSavedLocations" class="container">
     <ul [@listAnimation]="userLocations?.length" class="container__list-items">
       <li  class="list-item" *ngFor="let location of userLocations" (click)="locationClicked(location)">
         <h4>
@@ -11,7 +19,7 @@
         <button md-raised-button class="location-button" (click)="removeLocation(location, $event)">Remove</button>
       </li>
     </ul>
-  </div>
+  </div>-->
   <ng-template #noSavedLocations>
     <p class="no-locations">You have no saved locations</p>
   </ng-template>
