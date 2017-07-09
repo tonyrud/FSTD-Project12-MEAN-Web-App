@@ -18,6 +18,8 @@ if (major <= 7 && minor <= 5) {
   process.exit()
 }
 
+
+
 // import environmental variables from variables.env file
 require('dotenv').config({ path: __dirname + '/app/config/.env'})
 // Connect to cloud Database and handle bad connections
@@ -31,8 +33,23 @@ mongoose.connection.on('error', (err) => {
 require('./app/models/User')
 require('./app/models/Location')
 
+
+
 // Start api server
 const app = require('./app/server.js')
+
+app.use((req, res, next) => {
+  console.log('cors function ran')
+  // const origin = req.get('origin');
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+  if (req.method === 'OPTIONS') {
+    return res.status(200).json({})
+  }
+  next()
+})
+
 app.set('port', process.env.PORT || 4200)
 const server = app.listen(app.get('port'), () => {
   console.log(`Express API running → PORT ${server.address().port}`)
