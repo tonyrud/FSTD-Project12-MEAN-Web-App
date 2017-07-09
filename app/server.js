@@ -29,6 +29,7 @@ app.use((req, res, next) => {
 
 // set static path to angular app
 app.use(express.static(path.join(__dirname, './../dist')))
+app.use((req, res) => res.sendfile(__dirname + './../dist/index.html'));
 
 // Use morgan for http request logging in dev mode
 app.use(morgan('dev'))
