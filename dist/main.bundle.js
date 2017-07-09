@@ -2109,7 +2109,7 @@ MyMaterialModule = __decorate([
 
 var environment = {
     production: true,
-    apiUrl: 'https://hiking-app.herokuapp.com/api/',
+    apiUrl: 'http://hiking-app.herokuapp.com/api/',
     app_config: __WEBPACK_IMPORTED_MODULE_0__app_config__["a" /* APP_CONFIG */]
 };
 //# sourceMappingURL=environment.js.map
