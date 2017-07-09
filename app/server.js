@@ -18,7 +18,8 @@ const app = express()
 // app.use(cors()) 
 app.use((req, res, next) => {
   console.log('cors function ran')
-  res.header('Access-Control-Allow-Origin', '*')
+  const origin = req.get('origin');
+  res.header('Access-Control-Allow-Origin', origin)
   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
   if (req.method === 'OPTIONS') {
