@@ -17,7 +17,7 @@ const app = express()
 // Allows CORS
 // app.use(cors()) 
 app.use((req, res, next) => {
-  console.log('cors function ran')
+  console.log('cors in server.js ran')
   // const origin = req.get('origin');
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')

@@ -35,20 +35,8 @@ require('./app/models/Location')
 
 
 
-// Start api server
+// Import server.js and start api server
 const app = require('./app/server.js')
-
-app.use((req, res, next) => {
-  console.log('cors function ran')
-  // const origin = req.get('origin');
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  if (req.method === 'OPTIONS') {
-    return res.status(200).json({})
-  }
-  next()
-})
 
 app.set('port', process.env.PORT || 4200)
 const server = app.listen(app.get('port'), () => {
