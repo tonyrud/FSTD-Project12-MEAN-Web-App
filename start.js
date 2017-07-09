@@ -1,3 +1,11 @@
+
+/*
+  - Check node versions, respond with message if not using a correct version for async/await
+  - start database
+  - import and mongoose models to make available to entire app
+  - start server when all is good
+*/ 
+
 const mongoose = require('mongoose')
 
 // Make sure node 7.6+ for async functions
@@ -7,6 +15,7 @@ if (major <= 7 && minor <= 5) {
   process.exit()
 } else if (major >= 8) {
   console.log(`🚫 Your version(${process.versions.node}) is too new and will cause issues with node-sass module and Webpack! Please use a version that is below 8`)
+  process.exit()
 }
 
 // import environmental variables from variables.env file
@@ -18,7 +27,7 @@ mongoose.connection.on('error', (err) => {
   console.error(`🚫 → Database connection error: ${err.message}`)
 })
 
-// import models
+// import mongoose models
 require('./app/models/User')
 require('./app/models/Location')
 

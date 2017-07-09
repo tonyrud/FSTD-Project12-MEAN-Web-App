@@ -1,7 +1,6 @@
 /*
   async/await, needs this catch errors
-  Instead of using try{} catch(e) {} in each controller, wrap and async function in
-  catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
+  Instead of using try{} catch(e) {} in each controller, wrap and async function in catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
 
 exports.catchAsyncErrors = (fn) => {
@@ -20,8 +19,7 @@ exports.notFound = (req, res, next) => {
 }
 
 /*
-  Development Error Hanlder
-
+  Development Error Handler
   In development, show error messages related to pug views
 */
 exports.developmentErrors = (err, req, res, next) => {
@@ -37,13 +35,14 @@ exports.developmentErrors = (err, req, res, next) => {
 
 /*
   Production Error Handler
-
   Keep stack traces from user
 */
 exports.productionErrors = (err, req, res, next) => {
-  res.status(err.status || 500)
-  res.json({
+  console.log('----error passed to prodution errors. Message: ', err.message)
+  err.stack = err.stack || ''
+  const errorDetails = {
     message: err.message,
-    error: {}
-  })
+    status: err.status
+  }
+  res.status(err.status || 500).json({'error': errorDetails})
 }
