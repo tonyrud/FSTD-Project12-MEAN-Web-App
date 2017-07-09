@@ -15,7 +15,7 @@ interface UserLogin {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private loginForm: FormGroup
+  form: FormGroup
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
     this._auth.logout()
     // send empty user to reset header observable
     this._user.sendUser()
-    this.loginForm = this._formBuilder.group({
+    this.form = this._formBuilder.group({
       email: [null, [Validators.required]],
       password: [null, [Validators.required]]
     })
   }
 
   loginSubmit(form, event) {
-    this._auth.login(this.loginForm.value).subscribe(
+    this._auth.login(this.form.value).subscribe(
       user => {
         this._user.sendUser()
         this.router.navigate(['home'])

@@ -12,7 +12,7 @@ import { routerTransition } from '../../_animations/router.animations';
 })
 export class HomeComponent implements OnInit {
 
-  private user: User
+  user: User
 
   constructor(
     private _usersService: UsersService

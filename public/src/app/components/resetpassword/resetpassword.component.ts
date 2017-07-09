@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./resetpassword.component.scss']
 })
 export class ResetpasswordComponent implements OnInit {
-  private form: FormGroup
+  form: FormGroup
 
   constructor(
     private _formBuilder: FormBuilder,

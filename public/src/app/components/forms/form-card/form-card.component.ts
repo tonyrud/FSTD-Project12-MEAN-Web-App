@@ -13,7 +13,7 @@ export class FormCardComponent implements OnInit {
   @Output() primaryClicked = new EventEmitter()
   @Output() secondaryClicked = new EventEmitter()
 
-  private showSecondaryBtn: boolean = true
+  showSecondaryBtn: boolean = true
 
   constructor() { }
 

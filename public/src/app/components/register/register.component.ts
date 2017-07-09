@@ -10,8 +10,8 @@ import { AlertService } from '../../_services/alert.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  private registerForm: FormGroup
-  private returnUrl: string;
+  registerForm: FormGroup
+  returnUrl: string;
 
   constructor(
     private _fb: FormBuilder,

@@ -12,6 +12,7 @@ export interface Location {
   imageLink: string
   description: string
   activities: Activities[]
+  length: number
 }
 
 interface Activities {

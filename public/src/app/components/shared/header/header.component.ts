@@ -9,8 +9,8 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  private title: string
-  private user: User
+  title: string
+  user: User
 
   constructor(
     private _user: UsersService
