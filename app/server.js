@@ -13,8 +13,6 @@ require('./handlers/passport')
 // create Express app
 const app = express()
 
-// set static path to angular app
-app.use(express.static(path.join(__dirname, './../dist')))
 
 // Allows CORS
 // app.use(cors()) 
@@ -28,6 +26,9 @@ app.use((req, res, next) => {
   }
   next()
 })
+
+// set static path to angular app
+app.use(express.static(path.join(__dirname, './../dist')))
 
 // Use morgan for http request logging in dev mode
 app.use(morgan('dev'))
