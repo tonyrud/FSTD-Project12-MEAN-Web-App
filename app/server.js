@@ -15,22 +15,22 @@ const app = express()
 
 
 // Allows CORS
-// app.use(cors()) 
-app.use((req, res, next) => {
-  console.log('cors function ran')
-  const origin = req.get('origin');
-  res.header('Access-Control-Allow-Origin', origin)
-  res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  if (req.method === 'OPTIONS') {
-    return res.status(200).json({})
-  }
-  next()
-})
+app.use(cors()) 
+// app.use((req, res, next) => {
+//   console.log('cors function ran')
+//   // const origin = req.get('origin');
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+//   if (req.method === 'OPTIONS') {
+//     return res.status(200).json({})
+//   }
+//   next()
+// })
 
 // set static path to angular app
 app.use(express.static(path.join(__dirname, './../dist')))
-app.use((req, res) => res.sendfile(__dirname + './../dist/index.html'));
+// app.use((req, res) => res.sendFile(__dirname + './../dist/index.html'));
 
 // Use morgan for http request logging in dev mode
 app.use(morgan('dev'))
@@ -70,6 +70,9 @@ app.use(errorHandlers.notFound)
 if (app.get('env') === 'development') {
   /* Development Error Handler - Prints stack trace */
   app.use(errorHandlers.developmentErrors)
+} else {
+  // use to bypass add hash to all routes in angular
+  app.use((req, res) => res.sendFile(__dirname + './../dist/index.html'));
 }
 
 // production error handler
