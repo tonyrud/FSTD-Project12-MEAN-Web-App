@@ -36,7 +36,7 @@ require('./app/models/Location')
 
 
 // Import server.js and start api server
-const app = require('./app/server.js')
+const app = require('./server.js')
 
 app.set('port', process.env.PORT || 4200)
 const server = app.listen(app.get('port'), () => {

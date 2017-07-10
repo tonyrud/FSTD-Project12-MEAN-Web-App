@@ -5,10 +5,10 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const expressValidator = require('express-validator')
-const routes = require('./routes/index')
-const errorHandlers = require('./handlers/errorHandlers')
+const routes = require('./app/routes/index')
+const errorHandlers = require('./app/handlers/errorHandlers')
 const cors = require('cors')
-require('./handlers/passport')
+require('./app/handlers/passport')
 
 // create Express app
 const app = express()
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 })
 
 // set static path to angular app
-app.use(express.static(path.join(__dirname, './../dist')))
+app.use(express.static(path.join(__dirname, './dist')))
 // app.use((req, res) => res.sendFile(__dirname + './../dist/index.html'));
 
 // Use morgan for http request logging in dev mode
@@ -72,7 +72,7 @@ if (app.get('env') === 'development') {
   app.use(errorHandlers.developmentErrors)
 } else {
   // use to bypass add hash to all routes in angular
-  app.use((req, res) => res.sendFile(__dirname + './../dist/index.html'));
+  app.use((req, res) => res.sendFile(__dirname + './dist/index.html'));
 }
 
 // production error handler
