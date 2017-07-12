@@ -68,15 +68,16 @@ app.use('/api', routes)
 app.use(errorHandlers.notFound)
 
 if (app.get('env') === 'development') {
+  console.log('in development')
   /* Development Error Handler - Prints stack trace */
   app.use(errorHandlers.developmentErrors)
 } else {
+  console.log('in production')
   // use to bypass add hash to all routes in angular
   app.use((req, res) => res.sendFile(__dirname + './dist/index.html'));
+  // production error handler
+  app.use(errorHandlers.productionErrors)
 }
-
-// production error handler
-app.use(errorHandlers.productionErrors)
 
 // export app to then start the site in start.js
 module.exports = app
