@@ -9,7 +9,6 @@ const crypto = require('crypto')
 exports.getUsers = async (req, res, next) => {
   const users = await User.find({})
   if (!users) {
-    console.log('---error getting users')
     let err = new Error('Email or password not provided.')
     err.status = 401
     next(err)
@@ -112,8 +111,8 @@ exports.reset = async (req, res) => {
 }
 
 exports.confirmedPasswords = (req, res, next) => {
+  // check passwords match
   if (req.body.password === req.body['password-confirm']) {
-    console.log('passwords match')
     next()
   }
 }

@@ -26,10 +26,6 @@ app.use((req, res, next) => {
 
 // set static path to angular app
 app.use(express.static(path.join(__dirname, './dist')))
-// app.use((req, res) => res.sendFile(__dirname + './../dist/index.html'));
-
-// Use morgan for http request logging in dev mode
-app.use(morgan('dev'))
 
 // Takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json())
@@ -65,6 +61,8 @@ app.use(errorHandlers.notFound)
 
 if (app.get('env') === 'development') {
   console.log('in development')
+  // Use morgan for http request logging in dev mode
+  app.use(morgan('dev'))
   /* Development Error Handler - Prints stack trace */
   app.use(errorHandlers.developmentErrors)
 } else {

@@ -11,7 +11,6 @@ exports.saveLocation = async (req, res, next) => {
     // create and save location in database
     const location = new Location(req.body)
     await location.save()
-    console.log('save location')
   }
   next()
 }

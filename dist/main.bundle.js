@@ -380,7 +380,6 @@ var ViewLocationComponent = (function () {
             _this._trailsService.searchTrails("?lat=" + params.lat + "&limit=5&lon=" + params.lon + "&q[activities_activity_type_name_eq]=hiking&radius=1").subscribe(function (location) {
                 _this.location = location.places[0];
                 _this.location.image = params.image;
-                console.log(_this.location);
             });
         });
     };
