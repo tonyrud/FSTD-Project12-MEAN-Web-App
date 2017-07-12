@@ -7,7 +7,6 @@ const passport = require('passport')
 const expressValidator = require('express-validator')
 const routes = require('./app/routes/index')
 const errorHandlers = require('./app/handlers/errorHandlers')
-const cors = require('cors')
 require('./app/handlers/passport')
 
 // create Express app
@@ -15,10 +14,7 @@ const app = express()
 
 
 // Allows CORS
-// app.use(cors()) 
 app.use((req, res, next) => {
-  console.log('cors in server.js ran')
-  // const origin = req.get('origin');
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-requested-With, Content-Type, Accept, Authorization')
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
